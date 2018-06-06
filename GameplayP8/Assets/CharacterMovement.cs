@@ -5,28 +5,19 @@ using UnityEngine.AI;
 
 public class CharacterMovement : MonoBehaviour
 {
-    private NavMeshAgent m_Agent;
+    private CharacterBehaviour behaviour;
+    private NavMeshAgent agent;
     private Camera cam;
 
-	void Start ()
+	public void Init(NavMeshAgent agent, Camera cam, CharacterBehaviour behaviour)
     {
-        m_Agent = GetComponent<NavMeshAgent>();
-        cam = Camera.main;
+        this.behaviour = behaviour;
+        this.agent = agent;
+        this.cam = cam;
 	}
 	
-	void Update ()
+	public void SetGoal(Vector3 position)
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            RaycastHit hit;
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out hit))
-            {
-                //Transform objectHit = hit.transform;
-                m_Agent.SetDestination(hit.point);
-                print(hit.point);
-            }
-        }
+        agent.SetDestination(position);
 	}
 }

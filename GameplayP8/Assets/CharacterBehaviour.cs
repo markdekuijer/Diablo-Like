@@ -14,12 +14,14 @@ public class CharacterBehaviour : MonoBehaviour
 
     [Header("States")]
     [SerializeField] private bool isStatic;
+    [SerializeField] private bool isSlowed;
+    [SerializeField] private bool isDead; 
 
     [Header("Variables")]
     [SerializeField] private bool hasGoal;
     [SerializeField] private GameObject interactionGoal;
     [SerializeField] private float interactionthreshold = 0.1f;
-
+    [Space(15)]
     [SerializeField] private bool hasTarget;
     [SerializeField] private GameObject enemyTarget;
 
@@ -43,32 +45,35 @@ public class CharacterBehaviour : MonoBehaviour
         }
 
         HandleGoals();
+        HandleTargets();
     }
+
     #region Input
 
     public void HandleDirectInput(RaycastHit hit)
     {
         if (hit.transform.gameObject.CompareTag("Enemy"))
         {
-            hasGoal = true;
+            hasTarget = true;
             enemyTarget = hit.transform.gameObject;
             characterAttack.target = hit.transform.position;
             print("set enemy");
-            //fixBugHiero hij zet geen enemy
         }
-        if (hit.transform.gameObject.CompareTag("Ally"))
+        else if (hit.transform.gameObject.CompareTag("Ally"))
         {
             hasGoal = true;
             interactionGoal = hit.transform.gameObject;
         }
         else
         {
+            print("reset");
             hasGoal = false;
+            hasTarget = false;
             interactionGoal = null;
             enemyTarget = null;
         }
 
-        characterMovement.SetGoal(hit.point);
+        characterMovement.SetMoveTarget(hit.point);
     }
 
     public void HandleIndirectInput()
@@ -77,7 +82,6 @@ public class CharacterBehaviour : MonoBehaviour
     }
 
     #endregion
-
 
     #region Goals
 
@@ -90,13 +94,22 @@ public class CharacterBehaviour : MonoBehaviour
                 HandleInteractionGoal();
                 return;
             }
-            if (characterAttack)
+            Debug.LogError("No Remaining Goal. bugg somewhere");
+            hasGoal = false;
+        }
+    }
+
+    public void HandleTargets()
+    {
+        if (hasTarget)
+        {
+            if (enemyTarget != null)
             {
                 characterAttack.HandleAttackTarget();
                 return;
             }
-            Debug.LogError("No Remaining Goal. bugg somewhere");
-            hasGoal = false;
+            Debug.LogError("No Remaining Targets. bugg somewhere");
+            hasTarget = false;
         }
     }
 
@@ -113,7 +126,8 @@ public class CharacterBehaviour : MonoBehaviour
 
     public void StopMovement()
     {
-        characterMovement.SetGoal(transform.position);
+        characterMovement.SetMoveTarget(transform.position);
     }
+
     #endregion
 }

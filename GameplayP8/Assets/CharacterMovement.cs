@@ -5,6 +5,9 @@ using UnityEngine.AI;
 
 public class CharacterMovement : MonoBehaviour
 {
+    [Header("Stats")]
+    [SerializeField] private float movementSpeed = 3.5f;
+
     private CharacterBehaviour behaviour;
     private NavMeshAgent agent;
     private Camera cam;
@@ -14,9 +17,11 @@ public class CharacterMovement : MonoBehaviour
         this.behaviour = behaviour;
         this.agent = agent;
         this.cam = cam;
+
+        agent.speed = movementSpeed;
 	}
 	
-	public void SetGoal(Vector3 position)
+	public void SetMoveTarget(Vector3 position)
     {
         agent.SetDestination(position);
 	}

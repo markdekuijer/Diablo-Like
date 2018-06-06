@@ -6,9 +6,11 @@ public class CharacterAttack : MonoBehaviour
 {
     [Header("Stats")]
     [SerializeField] private float range;
+    [SerializeField] private float attackSpeed;
 
+    [HideInInspector] public Vector3 target;
     protected CharacterBehaviour behaviour;
-    public Vector3 target;
+    private float maxAttackSpeed;
 
     public virtual void Init(CharacterBehaviour behaviour)
     {
@@ -17,7 +19,6 @@ public class CharacterAttack : MonoBehaviour
 
     public virtual void Attack()
     {
-        print("attack");
     }
 
     public void HandleAttackTarget()

@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyHealthManager : MonoBehaviour
+public class HealthManager : MonoBehaviour
 {
+    [SerializeField] private bool isPlayer;
+
     [Header("Stats")]
     [SerializeField] private float maxHealth;
     [SerializeField] private float minHealth;
@@ -13,13 +15,21 @@ public class EnemyHealthManager : MonoBehaviour
     private float currentHealth, totalHealth;
     private float currentShield, totalShield;
 
-	void Start ()
+	void Start()
     {
-        totalHealth = Random.Range(minHealth, maxHealth);
-        currentHealth = totalHealth;
+        if (!isPlayer)
+        {
+            totalHealth = Random.Range(minHealth, maxHealth);
+            currentHealth = totalHealth;
 
-        totalShield = Random.Range(minShield, maxShield);
-        currentShield = totalShield;
+            totalShield = Random.Range(minShield, maxShield);
+            currentShield = totalShield;
+        }
+        else
+        {
+            //totalHealth = characterStats.totalHealth;
+            //totalShield = characterStats.totalShield;
+        }
 
 	}
 
@@ -46,7 +56,7 @@ public class EnemyHealthManager : MonoBehaviour
         }
     }
 
-	public void TakeDamage(float dmg)
+	public void TakeDamage(float dmg, CharacterBehaviour character = null)
     {
         if (dmg <= currentShield)
         {
@@ -61,14 +71,27 @@ public class EnemyHealthManager : MonoBehaviour
             //play animation
 
             if (currentHealth <= 0)
-                Death();
+            {
+                if (isPlayer)
+                    PlayerDeath();
+                else
+                    EnemyDeath(character);
+            }
         }
     }
 
-    public void Death()
+    public void PlayerDeath()
+    {
+
+    }
+
+    public void EnemyDeath(CharacterBehaviour character)
     {
         //handleDeathWithPool
         //deathAnimationCorotaine
+        character.isAttacking = false;
+        character.hasTarget = false;
+        character.enemyTarget = null;
         gameObject.SetActive(false);
     }
 }

@@ -10,20 +10,21 @@ public class CharacterBehaviour : MonoBehaviour
     [SerializeField] private Animator anim;
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private CharacterAttack characterAttack;
-    [SerializeField] private CharacterMovement characterMovement;
+    public CharacterMovement characterMovement;
 
     [Header("States")]
     [SerializeField] private bool isStatic;
     [SerializeField] private bool isSlowed;
-    [SerializeField] private bool isDead; 
+    [SerializeField] private bool isDead;
+    public bool isAttacking;
 
     [Header("Variables")]
     [SerializeField] private bool hasGoal;
     [SerializeField] private GameObject interactionGoal;
     [SerializeField] private float interactionthreshold = 0.1f;
     [Space(15)]
-    [SerializeField] private bool hasTarget;
-    [SerializeField] private GameObject enemyTarget;
+    public bool hasTarget;
+    public HealthManager enemyTarget;
 
     private void Start()
     {
@@ -46,6 +47,7 @@ public class CharacterBehaviour : MonoBehaviour
 
         HandleGoals();
         HandleTargets();
+        characterAttack.Tick();
     }
 
     #region Input
@@ -55,7 +57,7 @@ public class CharacterBehaviour : MonoBehaviour
         if (hit.transform.gameObject.CompareTag("Enemy"))
         {
             hasTarget = true;
-            enemyTarget = hit.transform.gameObject;
+            enemyTarget = hit.transform.gameObject.GetComponent<HealthManager>();
             characterAttack.target = hit.transform.position;
             print("set enemy");
         }
@@ -105,6 +107,7 @@ public class CharacterBehaviour : MonoBehaviour
         {
             if (enemyTarget != null)
             {
+                characterAttack.target = enemyTarget.transform.position;
                 characterAttack.HandleAttackTarget();
                 return;
             }

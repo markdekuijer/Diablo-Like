@@ -5,6 +5,20 @@ using UnityEngine.AI;
 
 public class CharacterBehaviour : MonoBehaviour
 {
+    /// <summary>
+    /// todo list:
+    /// rework skills from start
+    /// set attacks up first with Lmb and Rmb. archer has infinity range (hold Shift for lmb fire instead of walking)
+    /// rethink dmg system and projectile
+    /// every 'skill' SHOULD have the same projectile probebly. maar moet ff kijken. los script mogelijk voor los objectile
+    /// RETHINK attack states. (initAttack, ActualFire, OnHitRecieveDmg[mogelijk in projectile gebouwd{projectile virtual class}])
+    /// get an animator
+    /// bewaar auto-walk closer script/code voor melee characters. die hebben autowalk als je te ver bent
+    /// maak pools
+    /// rmb is alleen maar shooting. dus no worry about that, maar maak het
+    /// maak SWS 4 types. explosive arrow, basic arrow, slow arrow(slow mechenic maken), EOA spread arrow
+    /// </summary>
+
     [Header("On Startup")]
     [SerializeField] private Camera cam;
     [SerializeField] private Animator anim;

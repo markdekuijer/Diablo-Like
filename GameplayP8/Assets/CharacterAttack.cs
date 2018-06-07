@@ -27,10 +27,10 @@ public class CharacterAttack : MonoBehaviour
         behaviour.StopMovement();
         attackSpeed = maxAttackSpeed;
         //playAnim;
-        Attack();//removeThisLaterWhenAnimsExist
+        Attack(behaviour.enemyTarget.transform.position);//removeThisLaterWhenAnimsExist
     }
 
-    public virtual void Attack()
+    public virtual void Attack(Vector3 targetPos)
     {
         //getCurrentSkill
         //takeThatEffect

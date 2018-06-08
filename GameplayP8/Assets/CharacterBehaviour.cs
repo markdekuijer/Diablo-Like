@@ -30,15 +30,14 @@ public class CharacterBehaviour : MonoBehaviour
     [SerializeField] private bool isStatic;
     [SerializeField] private bool isSlowed;
     [SerializeField] private bool isDead;
+    [SerializeField] private bool isApproachingEnemy;//dit gaat nog nooit false, maar zou ook nooit true moeten zijn voor ranged characters
     public bool isAttacking;
 
     [Header("Variables")]
+    [SerializeField] private bool isRangedCharacter;
     [SerializeField] private bool hasGoal;
     [SerializeField] private GameObject interactionGoal;
     [SerializeField] private float interactionthreshold = 0.1f;
-    [Space(15)]
-    public bool hasTarget;
-    public HealthManager enemyTarget;
 
     private void Start()
     {
@@ -55,12 +54,18 @@ public class CharacterBehaviour : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
                 HandleDirectInput(hit);
+            if (Input.GetMouseButtonDown(1))
+                HandleSecondaryInput();
 
             HandleIndirectInput();
         }
+        if (isApproachingEnemy)
+        {
+            HandleTargets();
+
+        }
 
         HandleGoals();
-        HandleTargets();
         characterAttack.Tick();
     }
 
@@ -68,28 +73,38 @@ public class CharacterBehaviour : MonoBehaviour
 
     public void HandleDirectInput(RaycastHit hit)
     {
-        if (hit.transform.gameObject.CompareTag("Enemy"))
-        {
-            hasTarget = true;
-            enemyTarget = hit.transform.gameObject.GetComponent<HealthManager>();
-            characterAttack.target = hit.transform.position;
-            print("set enemy");
-        }
-        else if (hit.transform.gameObject.CompareTag("Ally"))
+        if (hit.transform.gameObject.CompareTag("Ally"))
         {
             hasGoal = true;
             interactionGoal = hit.transform.gameObject;
+            characterMovement.SetMoveTarget(hit.point);
+        }
+        else if(Input.GetKey(KeyCode.LeftShift) || hit.transform.gameObject.CompareTag("Enemy"))
+        {
+            hasGoal = false;
+            interactionGoal = null;
+            if (isRangedCharacter)
+            {
+                characterAttack.target = hit.point;
+                characterAttack.InitAttack();
+            }
+            else
+            {
+                isApproachingEnemy = true;
+            }
         }
         else
         {
-            print("reset");
+            characterMovement.SetMoveTarget(hit.point);
+            isApproachingEnemy = false;
             hasGoal = false;
-            hasTarget = false;
             interactionGoal = null;
-            enemyTarget = null;
         }
+    }
 
-        characterMovement.SetMoveTarget(hit.point);
+    public void HandleSecondaryInput()
+    {
+        print("need to make this");
     }
 
     public void HandleIndirectInput()
@@ -117,17 +132,8 @@ public class CharacterBehaviour : MonoBehaviour
 
     public void HandleTargets()
     {
-        if (hasTarget)
-        {
-            if (enemyTarget != null)
-            {
-                characterAttack.target = enemyTarget.transform.position;
-                characterAttack.HandleAttackTarget();
-                return;
-            }
-            Debug.LogError("No Remaining Targets. bugg somewhere");
-            hasTarget = false;
-        }
+        characterAttack.HandleAttackTarget();
+        return;
     }
 
     public void HandleInteractionGoal()
@@ -138,6 +144,7 @@ public class CharacterBehaviour : MonoBehaviour
             StopMovement();
             hasGoal = false;
             interactionGoal = null;
+            //activateGoalPurpose (missions,dialog,enteringRooms)
         }
     }
 

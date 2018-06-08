@@ -20,14 +20,12 @@ public class CharacterAttack : MonoBehaviour
 
     public void InitAttack()
     {
-        if (behaviour.enemyTarget == null)
-            return;
-
         behaviour.isAttacking = true;
         behaviour.StopMovement();
         attackSpeed = maxAttackSpeed;
+        this.transform.LookAt(new Vector3(target.x, transform.position.y, target.z));
         //playAnim;
-        Attack(behaviour.enemyTarget.transform.position);//removeThisLaterWhenAnimsExist
+        Attack(target);//removeThisLaterWhenAnimsExist
     }
 
     public virtual void Attack(Vector3 targetPos)
@@ -66,6 +64,9 @@ public abstract class Skill : MonoBehaviour
 
 public abstract class BasicAASkill : Skill
 {
+    public virtual void DealDamage(HealthManager manager = null)
+    {
+    }
 }
 
 public abstract class AbbilitySkill : Skill

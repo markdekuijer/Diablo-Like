@@ -28,10 +28,6 @@ public class ArcherAttack : CharacterAttack
 
     public override void Attack(Vector3 targetPos)
     {
-        if (behaviour == null)
-            print("rip");
-        base.Attack(targetPos);
-        currentAA.Execute(behaviour.enemyTarget.gameObject.transform.position);
-        //behaviour.enemyTarget.TakeDamage(1, behaviour);
+        currentAA.Execute(target);
     }
 }

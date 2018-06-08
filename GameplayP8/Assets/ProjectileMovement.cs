@@ -4,24 +4,33 @@ using UnityEngine;
 
 public class ProjectileMovement : MonoBehaviour
 {
-    [SerializeField] private Vector3 targetPosition;
     private float projectileSpeed;
+    private BasicAASkill skill;
 
-	public void Init(Skill skill, Vector3 targetPos, float projectileSpeed = 4)
+	public void Init(BasicAASkill skill, Vector3 targetPos, float projectileSpeed = 4, float offset = 0)
     {
-        print("inited");
-        this.targetPosition = targetPos;
+        this.skill = skill;
         this.projectileSpeed = projectileSpeed;
+        transform.LookAt(new Vector3(targetPos.x, transform.position.y,targetPos.z));
+        transform.Rotate(new Vector3(0, offset, 0));
 	}
 	
 	void Update ()
     {
-        //transform.LookAt(targetPosition);
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, projectileSpeed * Time.deltaTime);
-        if(transform.position == targetPosition)
+        transform.position += transform.forward * projectileSpeed * Time.deltaTime;
+	}
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
         {
-            //doDmg?HOW!!!
+            skill.DealDamage(other.gameObject.GetComponent<HealthManager>());
             gameObject.SetActive(false);
         }
-	}
+        if (other.gameObject.CompareTag("Wall"))
+        {
+            skill.DealDamage();
+            gameObject.SetActive(false);
+        }
+    }
 }

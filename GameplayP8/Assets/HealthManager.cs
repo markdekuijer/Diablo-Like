@@ -89,9 +89,8 @@ public class HealthManager : MonoBehaviour
     {
         //handleDeathWithPool
         //deathAnimationCorotaine
-        character.isAttacking = false;
-        character.hasTarget = false;
-        character.enemyTarget = null;
+        if(character != null)
+                character.isAttacking = false;
         gameObject.SetActive(false);
     }
 }

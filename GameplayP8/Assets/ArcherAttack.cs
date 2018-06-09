@@ -26,7 +26,7 @@ public class ArcherAttack : CharacterAttack
             currentAA = basicAttacks[3];
     }
 
-    public override void Attack(Vector3 targetPos)
+    public override void Attack(GameObject target)
     {
         currentAA.Execute(target);
     }

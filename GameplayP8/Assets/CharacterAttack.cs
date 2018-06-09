@@ -8,7 +8,7 @@ public class CharacterAttack : MonoBehaviour
     [SerializeField] private float range;
     [SerializeField] private float attackSpeed;
 
-    [HideInInspector] public Vector3 target;
+    [HideInInspector] public GameObject target;
     protected CharacterBehaviour behaviour;
     private float maxAttackSpeed;
 
@@ -23,12 +23,12 @@ public class CharacterAttack : MonoBehaviour
         behaviour.isAttacking = true;
         behaviour.StopMovement();
         attackSpeed = maxAttackSpeed;
-        this.transform.LookAt(new Vector3(target.x, transform.position.y, target.z));
+        this.transform.LookAt(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z));
         //playAnim;
         Attack(target);//removeThisLaterWhenAnimsExist
     }
 
-    public virtual void Attack(Vector3 targetPos)
+    public virtual void Attack(GameObject target)
     {
         //getCurrentSkill
         //takeThatEffect
@@ -42,7 +42,7 @@ public class CharacterAttack : MonoBehaviour
 
     public void HandleAttackTarget()
     {
-        if(Vector3.Distance(transform.position,target) <= range)
+        if(Vector3.Distance(transform.position,target.transform.position) <= range)
         {
             if (attackSpeed > 0)
                 return;
@@ -52,14 +52,14 @@ public class CharacterAttack : MonoBehaviour
         else
         {
             print("outside ranged");
-            behaviour.characterMovement.SetMoveTarget(target);
+            behaviour.characterMovement.SetMoveTarget(target.transform.position);
         }
     }
 }
 
 public abstract class Skill : MonoBehaviour
 {
-    public abstract void Execute(Vector3 position = default(Vector3));
+    public abstract void Execute(GameObject target = null);
 }
 
 public abstract class BasicAASkill : Skill

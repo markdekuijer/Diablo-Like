@@ -8,10 +8,10 @@ public class ArcherPierceAttack : BasicAASkill
     public float projectileSpeed;
     public float damage;
 
-    public override void Execute(Vector3 targetPos = default(Vector3))
+    public override void Execute(GameObject target = null)
     {
-        GameObject arrow = Instantiate<GameObject>(prefab, transform.position + new Vector3(0, 0.5f, 0), Quaternion.Euler(0, targetPos.y, 0));
-        arrow.GetComponent<ProjectileMovement>().Init(this, targetPos, projectileSpeed);
+        GameObject arrow = Instantiate<GameObject>(prefab, transform.position + new Vector3(0, 0.5f, 0), Quaternion.Euler(0, target.transform.position.y, 0));
+        arrow.GetComponent<ProjectileMovement>().Init(this, target.transform.position, projectileSpeed);
     }
 
     public override void DealDamage(HealthManager manager, GameObject projectile)

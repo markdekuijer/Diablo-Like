@@ -85,7 +85,16 @@ public class CharacterBehaviour : MonoBehaviour
             interactionGoal = null;
             if (isRangedCharacter)
             {
-                characterAttack.target = hit.point;
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    GameObject g = new GameObject(); //TODO make pool van ongeveer 20 voor invisable objects so you can find the target pos. inplaats van de pivot van het geraakte OBJ
+                    g.transform.position = hit.point;
+                    characterAttack.target = g;
+                }
+                else
+                {
+                    characterAttack.target = hit.transform.gameObject;
+                }
                 characterAttack.InitAttack();
             }
             else

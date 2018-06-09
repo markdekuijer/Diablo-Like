@@ -24,8 +24,7 @@ public class ProjectileMovement : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            skill.DealDamage(other.gameObject.GetComponent<HealthManager>());
-            gameObject.SetActive(false);
+            skill.DealDamage(other.gameObject.GetComponent<HealthManager>(),gameObject);
         }
         if (other.gameObject.CompareTag("Wall"))
         {

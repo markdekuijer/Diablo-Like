@@ -64,7 +64,7 @@ public abstract class Skill : MonoBehaviour
 
 public abstract class BasicAASkill : Skill
 {
-    public virtual void DealDamage(HealthManager manager = null)
+    public virtual void DealDamage(HealthManager manager = null, GameObject projectile = null)
     {
     }
 }

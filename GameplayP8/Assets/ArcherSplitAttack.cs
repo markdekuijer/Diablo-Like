@@ -21,12 +21,13 @@ public class ArcherSplitAttack : BasicAASkill
         }
     }
 
-    public override void DealDamage(HealthManager manager)
+    public override void DealDamage(HealthManager manager,GameObject projectile)
     {
         if(manager != null)
         {
             manager.TakeDamage(damage);
         }
+        projectile.SetActive(false);
     }
 }
 

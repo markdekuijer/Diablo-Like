@@ -1,14 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArcherAoeAttack : BasicAASkill
+public class ArcherSlowAttack : BasicAASkill
 {
     public GameObject prefab;
-    public float projectileSpeed;
     public float damage;
-    public float radius;
-    public LayerMask mask;
+    public float slowAmount;
+    public float slowDuration;
+    public float projectileSpeed;
 
     public override void Execute(Vector3 targetPos = default(Vector3))
     {
@@ -18,11 +19,8 @@ public class ArcherAoeAttack : BasicAASkill
 
     public override void DealDamage(HealthManager manager, GameObject projectile)
     {
-        Collider[] hitColliders = Physics.OverlapSphere(manager.gameObject.transform.position, radius, mask);
-        for (int i = 0; i < hitColliders.Length; i++)
-        {
-            hitColliders[i].gameObject.GetComponent<HealthManager>().TakeDamage(damage);
-        }
+        manager.TakeDamage(damage);
+        manager.gameObject.GetComponent<EnemyMovement>().GiveSlow(slowAmount, slowDuration);
         projectile.SetActive(false);
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.574817, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -252,6 +252,9 @@ MonoBehaviour:
   speed: 5
   pos1: {x: 7.98, y: 4.583333, z: 30.56}
   pos2: {x: 7.98, y: 4.583333, z: 10.75}
+  isSlowed: 0
+  slowDuration: 0
+  slowAmount: 0
 --- !u!1 &264292723
 GameObject:
   m_ObjectHideFlags: 0
@@ -5530,7 +5533,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh11292
+  m_Name: pb_Mesh11386
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -6928,6 +6931,8 @@ GameObject:
   - component: {fileID: 1078938324}
   - component: {fileID: 1078938325}
   - component: {fileID: 1078938326}
+  - component: {fileID: 1078938327}
+  - component: {fileID: 1078938328}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -7092,6 +7097,8 @@ MonoBehaviour:
   basicAttacks:
   - {fileID: 1078938325}
   - {fileID: 1078938326}
+  - {fileID: 1078938327}
+  - {fileID: 1078938328}
   currentAA: {fileID: 0}
 --- !u!114 &1078938324
 MonoBehaviour:
@@ -7143,6 +7150,36 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 256
+--- !u!114 &1078938327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1078938314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ea0a36a7a054843b873a7619416fb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1865631788272514, guid: 65ef9e9faee491e4d832a986872553a6, type: 2}
+  damage: 2
+  slowAmount: 3
+  slowDuration: 1
+  projectileSpeed: 8
+--- !u!114 &1078938328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1078938314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 819a46f59b51f4840a3f43a5dbea4ef7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1865631788272514, guid: 65ef9e9faee491e4d832a986872553a6, type: 2}
+  projectileSpeed: 8
+  damage: 2
 --- !u!43 &1183279196
 Mesh:
   m_ObjectHideFlags: 0
@@ -7478,6 +7515,9 @@ MonoBehaviour:
   speed: 5
   pos1: {x: 5.78, y: 4.48, z: 23.09}
   pos2: {x: 5.78, y: 4.48, z: 23.09}
+  isSlowed: 0
+  slowDuration: 0
+  slowAmount: 0
 --- !u!195 &1368213917
 NavMeshAgent:
   m_ObjectHideFlags: 0

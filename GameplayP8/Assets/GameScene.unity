@@ -6934,6 +6934,7 @@ GameObject:
   - component: {fileID: 1078938327}
   - component: {fileID: 1078938328}
   - component: {fileID: 1078938329}
+  - component: {fileID: 1078938330}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -7199,6 +7200,22 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   damage: 4
+--- !u!114 &1078938330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1078938314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc3bffaec098d9a418dd61a9ba51c11c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1865631788272514, guid: 65ef9e9faee491e4d832a986872553a6, type: 2}
+  projectileSpeed: 10
+  damage: 5
+  lifesteal: 2
+  myHealth: {fileID: 1078938324}
 --- !u!43 &1183279196
 Mesh:
   m_ObjectHideFlags: 0

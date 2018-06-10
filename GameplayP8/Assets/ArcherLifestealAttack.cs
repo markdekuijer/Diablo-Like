@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArcherPierceAttack : BasicAASkill
+public class ArcherLifestealAttack : BasicAASkill
 {
     public GameObject prefab;
     public float projectileSpeed;
     public float damage;
+    public float lifesteal;
+    public HealthManager myHealth;
 
     public override void Execute(GameObject target = null)
     {
@@ -16,6 +18,8 @@ public class ArcherPierceAttack : BasicAASkill
 
     public override void DealDamage(HealthManager manager, GameObject projectile)
     {
+        myHealth.HealSingle(lifesteal, 0); //lifesteal * playerlevel + lifesteal stats
         manager.TakeDamage(damage);
+        gameObject.SetActive(false);
     }
 }

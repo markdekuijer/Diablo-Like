@@ -47,6 +47,15 @@ public class CharacterBehaviour : MonoBehaviour
 
     void Update ()
     {
+        GetBaseInput();
+        HandleGoals();
+        characterAttack.Tick();
+    }
+
+    #region Input
+
+    public void GetBaseInput()
+    {
         RaycastHit hit;
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
@@ -62,14 +71,21 @@ public class CharacterBehaviour : MonoBehaviour
         if (isApproachingEnemy)
         {
             HandleTargets();
-
         }
 
-        HandleGoals();
-        characterAttack.Tick();
+        GetAbbilityInput(hit);
     }
 
-    #region Input
+    public void GetAbbilityInput(RaycastHit hit)
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            characterAttack.currentAbbility.Init(hit.transform.position);
+
+        for (int i = 0; i < characterAttack.abbilityAttacks.Count; i++)
+        {
+            characterAttack.abbilityAttacks[i].Tick();
+        }
+    }
 
     public void HandleDirectInput(RaycastHit hit)
     {

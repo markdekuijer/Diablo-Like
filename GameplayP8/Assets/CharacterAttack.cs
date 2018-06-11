@@ -8,6 +8,12 @@ public class CharacterAttack : MonoBehaviour
     [SerializeField] private float range;
     [SerializeField] private float attackSpeed;
 
+    [Header("Variables")]
+    public List<BasicAASkill> basicAttacks = new List<BasicAASkill>();
+    public List<AbbilitySkill> abbilityAttacks = new List<AbbilitySkill>();
+    public BasicAASkill currentAA;
+    public AbbilitySkill currentAbbility;
+
     [HideInInspector] public GameObject target;
     protected CharacterBehaviour behaviour;
     private float maxAttackSpeed;
@@ -59,7 +65,6 @@ public class CharacterAttack : MonoBehaviour
 
 public abstract class Skill : MonoBehaviour
 {
-    public abstract void Execute(GameObject target = null);
 }
 
 public abstract class BasicAASkill : Skill
@@ -67,9 +72,16 @@ public abstract class BasicAASkill : Skill
     public virtual void DealDamage(HealthManager manager = null, GameObject projectile = null)
     {
     }
+    public abstract void Execute(GameObject target = null);
 }
 
 public abstract class AbbilitySkill : Skill
 {
+    public virtual void Init(Vector3 position = default(Vector3))
+    {
+    }
+    public virtual void Tick()
+    {
+    }
 }
 

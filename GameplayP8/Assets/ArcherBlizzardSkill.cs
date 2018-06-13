@@ -10,7 +10,6 @@ public class ArcherBlizzardSkill : AbbilitySkill
     [SerializeField] private float radius;
     [SerializeField] private LayerMask mask;
     [SerializeField] private float damage;
-    [SerializeField] private float slowAmount;
 
     private float iterationsLeft;
     private float iterationTime;
@@ -18,6 +17,7 @@ public class ArcherBlizzardSkill : AbbilitySkill
 
     public override void Init(Vector3 position = default(Vector3))
     {
+        obj.SetActive(true);
         obj.transform.position = position;
         iterationsLeft = iterations;
         iterationTime = totalDuration / iterations;
@@ -34,32 +34,17 @@ public class ArcherBlizzardSkill : AbbilitySkill
             iterationTime = maxIterationTime;
             Execute();
         }
+        if (iterationsLeft <= 0)
+            obj.SetActive(false);
     }
 
     public void Execute()
     {
         print("execute");
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius, mask);
+        Collider[] hitColliders = Physics.OverlapSphere(obj.transform.position, radius, mask);
         for (int i = 0; i < hitColliders.Length; i++)
         {
             hitColliders[i].gameObject.GetComponent<HealthManager>().TakeDamage(damage);
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            other.GetComponent<EnemyMovement>().slowAmount = slowAmount;
-            other.GetComponent<EnemyMovement>().slowDuration = Mathf.Infinity;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            other.GetComponent<EnemyMovement>().slowDuration = 0;
         }
     }
 }

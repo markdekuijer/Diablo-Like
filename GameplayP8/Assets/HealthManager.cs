@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class HealthManager : MonoBehaviour
 {
@@ -12,21 +13,27 @@ public class HealthManager : MonoBehaviour
     [SerializeField] private float maxShield;
     [SerializeField] private float minShield;
 
+    public event Action<float, HealthManager> DamageEvent;
+
     private float currentHealth, totalHealth;
     private float currentShield, totalShield;
 
 	void Start()
     {
+        DamageEvent += TakeDamage;
+
         if (!isPlayer)
         {
-            totalHealth = Random.Range(minHealth, maxHealth);
+            totalHealth = UnityEngine.Random.Range(minHealth, maxHealth);
             currentHealth = totalHealth;
 
-            totalShield = Random.Range(minShield, maxShield);
+            totalShield = UnityEngine.Random.Range(minShield, maxShield);
             currentShield = totalShield;
         }
         else
         {
+            totalHealth = 100;
+            currentHealth = totalHealth;
             //totalHealth = characterStats.totalHealth;
             //totalShield = characterStats.totalShield;
         }
@@ -56,7 +63,12 @@ public class HealthManager : MonoBehaviour
         }
     }
 
-	public void TakeDamage(float dmg, CharacterBehaviour character = null)
+    public void Damage(float dmg, HealthManager h = null)
+    {
+        DamageEvent(dmg, h);
+    }
+
+	public void TakeDamage(float dmg, HealthManager h = null)
     {
         if (dmg <= currentShield)
         {
@@ -75,7 +87,7 @@ public class HealthManager : MonoBehaviour
                 if (isPlayer)
                     PlayerDeath();
                 else
-                    EnemyDeath(character);
+                    EnemyDeath(gameObject.GetComponent<CharacterBehaviour>());
             }
         }
     }
@@ -89,8 +101,8 @@ public class HealthManager : MonoBehaviour
     {
         //handleDeathWithPool
         //deathAnimationCorotaine
-        if(character != null)
-                character.isAttacking = false;
+        if (character != null)
+            character.isAttacking = false;
         gameObject.SetActive(false);
     }
 }

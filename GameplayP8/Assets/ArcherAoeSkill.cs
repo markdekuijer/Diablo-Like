@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ArcherAoeSkill : AbbilitySkill
 {
-    [SerializeField] private Particle obj;
+    [SerializeField] private GameObject obj;
     [SerializeField] private int iterations;
     [SerializeField] private float totalDuration;
     [SerializeField] private float radius;
@@ -17,6 +17,7 @@ public class ArcherAoeSkill : AbbilitySkill
 
     public override void Init(Vector3 position = default(Vector3))
     {
+        obj.transform.position = transform.position + Vector3.down;
         iterationsLeft = iterations;
         iterationTime = totalDuration / iterations;
         maxIterationTime = iterationTime;
@@ -25,6 +26,7 @@ public class ArcherAoeSkill : AbbilitySkill
     public override void Tick ()
     {
         //obj.Play();
+        obj.transform.position = transform.position + Vector3.down;
         iterationTime -= Time.deltaTime;
         if(iterationTime <= 0 && iterationsLeft > 0)
         {
@@ -32,6 +34,8 @@ public class ArcherAoeSkill : AbbilitySkill
             iterationTime = maxIterationTime;
             Execute();
         }
+        if (iterationsLeft <= 0)
+            obj.transform.position = new Vector3(-10, 0, -10);
 	}
 
     public void Execute()

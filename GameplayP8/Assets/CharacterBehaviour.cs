@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using System;
 
 public class CharacterBehaviour : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class CharacterBehaviour : MonoBehaviour
     /// rmb is alleen maar shooting. dus no worry about that, maar maak het
     /// maak SWS 4 types. explosive arrow, basic arrow, slow arrow(slow mechenic maken), EOA spread arrow
     /// </summary>
-
+    
     [Header("On Startup")]
     [SerializeField] private Camera cam;
     [SerializeField] private Animator anim;
@@ -79,7 +80,7 @@ public class CharacterBehaviour : MonoBehaviour
     public void GetAbbilityInput(RaycastHit hit)
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
-            characterAttack.currentAbbility.Init(hit.transform.position);
+            characterAttack.currentAbbility.Init(hit.point);
 
         for (int i = 0; i < characterAttack.abbilityAttacks.Count; i++)
         {

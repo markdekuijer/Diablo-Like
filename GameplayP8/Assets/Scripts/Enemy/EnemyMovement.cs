@@ -64,12 +64,10 @@ public class EnemyMovement : MonoBehaviour
         if (transform.position == pos1)
         {
             agent.SetDestination(pos2);
-            print("a");
         }
         if (transform.position == pos2)
         {
             agent.SetDestination(pos1);
-            print("b");
         }
     }
 

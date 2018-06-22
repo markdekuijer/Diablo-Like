@@ -22,9 +22,9 @@ public class CharacterBehaviour : MonoBehaviour
     
     [Header("On Startup")]
     [SerializeField] private Camera cam;
-    [SerializeField] private Animator anim;
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private CharacterAttack characterAttack;
+    public AnimatorHook anim;
     public CharacterMovement characterMovement;
 
     [Header("States")]
@@ -32,6 +32,7 @@ public class CharacterBehaviour : MonoBehaviour
     [SerializeField] private bool isSlowed;
     [SerializeField] private bool isDead;
     [SerializeField] private bool isApproachingEnemy;//dit gaat nog nooit false, maar zou ook nooit true moeten zijn voor ranged characters
+    public bool isMoving;
     public bool isAttacking;
 
     [Header("Variables")]
@@ -50,7 +51,16 @@ public class CharacterBehaviour : MonoBehaviour
     {
         GetBaseInput();
         HandleGoals();
+        HandleAnimations();
         characterAttack.Tick();
+    }
+
+    public void HandleAnimations()
+    {
+        if (agent.velocity == Vector3.zero)
+            isMoving = false;
+        else
+            isMoving = true;
     }
 
     #region Input

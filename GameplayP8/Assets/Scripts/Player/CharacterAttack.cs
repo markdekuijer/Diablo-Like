@@ -9,6 +9,7 @@ public class CharacterAttack : MonoBehaviour
     [SerializeField] private float attackSpeed;
 
     [Header("Variables")]
+    [SerializeField] private float inAttackDuration;
     public List<BasicAASkill> basicAttacks = new List<BasicAASkill>();
     public List<AbbilitySkill> abbilityAttacks = new List<AbbilitySkill>();
     public BasicAASkill currentAA;
@@ -16,21 +17,25 @@ public class CharacterAttack : MonoBehaviour
 
     [HideInInspector] public GameObject target;
     protected CharacterBehaviour behaviour;
+
     private float maxAttackSpeed;
+    private float maxInAttackDuration;
 
     public virtual void Init(CharacterBehaviour behaviour)
     {
         this.behaviour = behaviour;
         maxAttackSpeed = attackSpeed;
+        maxInAttackDuration = inAttackDuration;
     }
 
     public void InitAttack()
     {
+        inAttackDuration = maxInAttackDuration;
         behaviour.isAttacking = true;
         behaviour.StopMovement();
+        behaviour.anim.TriggerAnim("Attack");
         attackSpeed = maxAttackSpeed;
         this.transform.LookAt(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z));
-        //playAnim;
         Attack(target);//removeThisLaterWhenAnimsExist
     }
 
@@ -44,6 +49,14 @@ public class CharacterAttack : MonoBehaviour
     public virtual void Tick()
     {
         attackSpeed -= Time.deltaTime;
+        if (behaviour.isAttacking)
+        {
+            inAttackDuration -= Time.deltaTime;
+            if(inAttackDuration <= 0)
+            {
+                behaviour.isAttacking = false;
+            }
+        }
     }
 
     public void HandleAttackTarget()

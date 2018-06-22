@@ -13,13 +13,14 @@ public class ArcherArmorReflectSkill : AbbilitySkill
 
     public override void Init(Vector3 position = default(Vector3))
     {
+        print("reflex dmg started");
         //behaviour.stats.armor += BonusArmor;
         //behaviour.stats.totalArmor += BonusArmor;
         obj.transform.position = transform.position;
         myHp.DamageEvent += Reflect;
     }
 
-    public void Reflect(float i, HealthManager enemyHp)
+    public void Reflect(float i, HealthManager enemyHp, GameObject g = null)
     {
         if (enemyHp == null)
         {
@@ -28,7 +29,7 @@ public class ArcherArmorReflectSkill : AbbilitySkill
         }
 
         float newDmg = i / 100 * percentageReflet;
-        enemyHp.Damage(newDmg);
+        enemyHp.Damage(newDmg , null, gameObject);
     }
 
     public override void Tick()

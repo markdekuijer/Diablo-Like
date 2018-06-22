@@ -69,9 +69,9 @@ public class ArcherSplitAttack : BasicAASkill
         if (manager != null)
         {
             if (projectile.name != "miniArrow")
-                manager.TakeDamage(damage);
+                manager.Damage(damage , null, gameObject);
             else
-                manager.TakeDamage((damage / 100) * 75);
+                manager.Damage((damage / 100) * 75, null, gameObject);
         }
         projectile.SetActive(false);
     }

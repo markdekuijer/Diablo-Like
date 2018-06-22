@@ -11,9 +11,18 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private Vector3 pos1;
     [SerializeField] private Vector3 pos2;
 
-    [Header("Movementspeed Effects")]
+    [Header("Stats")]
     public bool isRooted;
     public bool isSlowed;
+    public bool inRange;
+    public bool inAttack;
+
+    [Header("Variables")]
+    [SerializeField] private bool ignoreWaypoints;
+    [SerializeField] private float hitRange;
+    public GameObject moveTarget;
+
+    [Header("Others")]
     public float slowDuration;
     public float slowAmount;
 
@@ -22,13 +31,17 @@ public class EnemyMovement : MonoBehaviour
     private void Start()
     {
         originalSpeed = speed;
-        agent.SetDestination(pos1);
+        if(!ignoreWaypoints)
+            agent.SetDestination(pos1);
     }
 
 
     void Update ()
     {
-        WaypointWalking();
+        if(!ignoreWaypoints)
+            WaypointWalking();
+        if(!inAttack)
+            HandleTargetMoving();
         HandleMovementSpeed();
         HandleRoot();
     }
@@ -69,6 +82,21 @@ public class EnemyMovement : MonoBehaviour
         {
             agent.SetDestination(pos1);
         }
+    }
+
+    public void HandleTargetMoving()
+    {
+        if(moveTarget != null)
+        {
+            agent.SetDestination(moveTarget.transform.position);
+            inRange = Vector3.Distance(moveTarget.transform.position, transform.position) < hitRange;
+        }
+    }
+    public void SetTarget(GameObject g)
+    {
+        if (!gameObject.activeSelf)
+            return;
+        moveTarget = g;
     }
 
     public void HandleRoot()

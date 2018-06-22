@@ -13,10 +13,11 @@ public class HealthManager : MonoBehaviour
     [SerializeField] private float maxShield;
     [SerializeField] private float minShield;
 
-    public event Action<float, HealthManager> DamageEvent;
+    public event Action<float, HealthManager, GameObject> DamageEvent;
 
-    private float currentHealth, totalHealth;
+    [SerializeField] private float currentHealth, totalHealth;
     private float currentShield, totalShield;
+    public bool isDead;
 
 	void Start()
     {
@@ -63,12 +64,12 @@ public class HealthManager : MonoBehaviour
         }
     }
 
-    public void Damage(float dmg, HealthManager h = null)
+    public void Damage(float dmg, HealthManager h = null, GameObject g = null)
     {
-        DamageEvent(dmg, h);
+        DamageEvent(dmg, h, g);
     }
 
-	public void TakeDamage(float dmg, HealthManager h = null)
+	public void TakeDamage(float dmg, HealthManager h = null, GameObject g = null)
     {
         if (dmg <= currentShield)
         {
@@ -94,13 +95,14 @@ public class HealthManager : MonoBehaviour
 
     public void PlayerDeath()
     {
-
+        isDead = true;
     }
 
     public void EnemyDeath(CharacterBehaviour character)
     {
         //handleDeathWithPool
         //deathAnimationCorotaine
+        isDead = true;
         gameObject.SetActive(false);
     }
 }

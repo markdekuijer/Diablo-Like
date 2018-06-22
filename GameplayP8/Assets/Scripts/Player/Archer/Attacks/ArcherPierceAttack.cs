@@ -16,6 +16,6 @@ public class ArcherPierceAttack : BasicAASkill
 
     public override void DealDamage(HealthManager manager, GameObject projectile)
     {
-        manager.TakeDamage(damage);
+        manager.Damage(damage, null, gameObject);
     }
 }

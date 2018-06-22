@@ -44,7 +44,7 @@ public class ArcherAoeSkill : AbbilitySkill
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius, mask);
         for (int i = 0; i < hitColliders.Length; i++)
         {
-            hitColliders[i].gameObject.GetComponent<HealthManager>().TakeDamage(damage);
+            hitColliders[i].gameObject.GetComponent<HealthManager>().Damage(damage, null, gameObject);
         }
     }
 }

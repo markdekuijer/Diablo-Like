@@ -5,7 +5,7 @@ using UnityEngine;
 public class DamageOnEnter : MonoBehaviour
 {
     [SerializeField] private float dmg;
-
+    [SerializeField] private GameObject playerObj;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy"))
@@ -13,7 +13,7 @@ public class DamageOnEnter : MonoBehaviour
             HealthManager hp = other.gameObject.GetComponent<HealthManager>();
             if(hp != null)
             {
-                hp.Damage(dmg);
+                hp.Damage(dmg , null, playerObj);
             }
         }       
     }

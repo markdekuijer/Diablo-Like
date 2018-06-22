@@ -24,12 +24,12 @@ public class ArcherAoeLifestealSkill : AbbilitySkill
         Collider[] hitColliders = Physics.OverlapSphere(position, radius, mask);
         for (int i = 0; i < hitColliders.Length; i++)
         {
-            hitColliders[i].gameObject.GetComponent<HealthManager>().Damage(damage);
+            hitColliders[i].gameObject.GetComponent<HealthManager>().Damage(damage, null, gameObject);
             if (i < 25)
             {
                 particles[i].gameObject.SetActive(true);
                 particles[i].gameObject.transform.position = hitColliders[i].gameObject.transform.position;
-            }
+            }//TODO still need to do dmg
         }
 
         duration = maxDuration;

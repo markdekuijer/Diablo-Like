@@ -25,7 +25,7 @@ public class ArcherSprayAttack : BasicAASkill
     {
         if(manager != null)
         {
-            manager.TakeDamage(damage);
+            manager.Damage(damage, null, gameObject);
         }
         projectile.SetActive(false);
     }

@@ -19,7 +19,7 @@ public class ArcherSlowAttack : BasicAASkill
 
     public override void DealDamage(HealthManager manager, GameObject projectile)
     {
-        manager.TakeDamage(damage);
+        manager.Damage(damage , null, gameObject);
         manager.gameObject.GetComponent<EnemyMovement>().GiveSlow(slowAmount, slowDuration);
         projectile.SetActive(false);
     }

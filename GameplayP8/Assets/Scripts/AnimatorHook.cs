@@ -51,7 +51,7 @@ public class AnimatorHook : MonoBehaviour
         anim.CrossFade(animationName, 0.1f);
     }
     
-    public void SetWalkingSpeed(float speed)
+    public void SetAnimSpeed(float speed)
     {
         anim.speed = speed;
     }

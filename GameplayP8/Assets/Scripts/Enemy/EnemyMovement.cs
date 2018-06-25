@@ -10,6 +10,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private Vector3 pos1;
     [SerializeField] private Vector3 pos2;
+    [SerializeField] private EnemyBrain brain;
 
     [Header("Stats")]
     public bool isRooted;
@@ -55,6 +56,7 @@ public class EnemyMovement : MonoBehaviour
 
     public void HandleMovementSpeed()
     {
+        brain.animHook.walking = !agent.isStopped;
         if (isSlowed)
         {
             slowDuration -= Time.deltaTime;

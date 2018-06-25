@@ -7,6 +7,7 @@ public class EnemyBrain : MonoBehaviour
     public EnemyMovement movement;
     public HealthManager health;
     public EnemyAttack attack;
+    public EnemyAnimatorHook animHook;
     public GameObject target;
 
     public bool alerted;
@@ -23,6 +24,7 @@ public class EnemyBrain : MonoBehaviour
     public void Tick()
     {
         attack.Tick();
+        animHook.Tick();
     }
 
     public void OnHitAlert(float f, HealthManager h, GameObject target)

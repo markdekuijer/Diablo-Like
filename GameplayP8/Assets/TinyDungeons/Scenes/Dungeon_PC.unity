@@ -5,11 +5,12 @@ OcclusionCullingSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_OcclusionBakeSettings:
-    smallestOccluder: 5
-    smallestHole: 0.25
+    smallestOccluder: 2
+    smallestHole: 0.1
     backfaceThreshold: 100
-  m_SceneGUID: 00000000000000000000000000000000
-  m_OcclusionCullingData: {fileID: 0}
+  m_SceneGUID: ee6d62676d2223a49bda10e5adc22710
+  m_OcclusionCullingData: {fileID: 36300000, guid: ed606ffdb13107d48a29f02f124d7722,
+    type: 2}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -38,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.5507005
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 0.5507005}
+  m_IndirectSpecularColor: {r: 0.33618918, g: 0.3750558, b: 0.43620452, a: 0.5507005}
 --- !u!157 &4
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -51,8 +52,8 @@ LightmapSettings:
     m_AlbedoBoost: 1
     m_TemporalCoherenceThreshold: 1
     m_EnvironmentLightingMode: 0
-    m_EnableBakedLightmaps: 0
-    m_EnableRealtimeLightmaps: 0
+    m_EnableBakedLightmaps: 1
+    m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
     serializedVersion: 9
     m_Resolution: 2
@@ -90,7 +91,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 112000000, guid: 58860c1e4ccb4b948912cd212837ccb9,
+  m_LightingDataAsset: {fileID: 112001124, guid: f67af55d0634454409314b1c852cad72,
     type: 2}
   m_UseShadowmask: 0
 --- !u!196 &5
@@ -5080,6 +5081,34 @@ Prefab:
     - target: {fileID: 11419438, guid: 8af0b150f56a1d641bdea997d494825a, type: 2}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11418852, guid: 8af0b150f56a1d641bdea997d494825a, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11463726, guid: 8af0b150f56a1d641bdea997d494825a, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11431822, guid: 8af0b150f56a1d641bdea997d494825a, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11459850, guid: 8af0b150f56a1d641bdea997d494825a, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11421044, guid: 8af0b150f56a1d641bdea997d494825a, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11478258, guid: 8af0b150f56a1d641bdea997d494825a, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11409516, guid: 8af0b150f56a1d641bdea997d494825a, type: 2}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11444572, guid: 8af0b150f56a1d641bdea997d494825a, type: 2}

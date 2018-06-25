@@ -36,9 +36,14 @@ public class EnemyAttack : MonoBehaviour
     {
         attackRate = maxAttackRate;
         brain.movement.inAttack = true;
-        //playAnim;
-        //point in anim will init attack
-        Attack();
+        string attackString = "DS_onehand_attack";
+
+        int i = Random.Range(0, 3);
+        if (i == 0) attackString += "_A";
+        else if (i == 1) attackString += "_B";
+        else attackString += "_C";
+
+        brain.animHook.PlayAnim(attackString);
     }
 
     public void Attack()
@@ -50,7 +55,6 @@ public class EnemyAttack : MonoBehaviour
         }
         else
             print("Missed Attack");
-        ReenableMovement();
     }
 
     public void ReenableMovement()

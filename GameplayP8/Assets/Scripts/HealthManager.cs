@@ -71,6 +71,11 @@ public class HealthManager : MonoBehaviour
 
 	public void TakeDamage(float dmg, HealthManager h = null, GameObject g = null)
     {
+        GameObject go = ObjectPooler.SharedInstance.GetPooledObject(0);
+        go.GetComponent<DamageShow>().Init(Mathf.RoundToInt(dmg));
+        go.transform.position = transform.position + Vector3.up * 2;
+        go.SetActive(true);
+
         if (dmg <= currentShield)
         {
             currentShield -= dmg;

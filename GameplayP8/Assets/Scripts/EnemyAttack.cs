@@ -12,19 +12,19 @@ public class EnemyAttack : MonoBehaviour
 
     private float maxAttackRate;
 
-	public void Init(EnemyBrain brain)
+	public virtual void Init(EnemyBrain brain)
     {
         this.brain = brain;
         maxAttackRate = attackRate;
     }
 
-    public void Tick()
+    public virtual void Tick()
     {
         CheckForAttack();
         attackRate -= Time.deltaTime;
     }
 
-    public void CheckForAttack()
+    public virtual void CheckForAttack()
     {
         canAttack = (attackRate <= 0);
 
@@ -32,10 +32,11 @@ public class EnemyAttack : MonoBehaviour
             InitAttack();
     }
 
-    public void InitAttack()
+    public virtual void InitAttack()
     {
-        attackRate = maxAttackRate;
+        brain.movement.inRange = false;
         brain.movement.inAttack = true;
+        attackRate = maxAttackRate;
         string attackString = "DS_onehand_attack";
 
         int i = Random.Range(0, 3);
@@ -46,7 +47,7 @@ public class EnemyAttack : MonoBehaviour
         brain.animHook.PlayAnim(attackString);
     }
 
-    public void Attack()
+    public virtual void Attack()
     {
         if(Vector3.Distance(transform.position, brain.movement.moveTarget.transform.position) < maxAttackRange)
         {
@@ -57,7 +58,7 @@ public class EnemyAttack : MonoBehaviour
             print("Missed Attack");
     }
 
-    public void ReenableMovement()
+    public virtual void ReenableMovement()
     {
         brain.movement.inAttack = false;
     }

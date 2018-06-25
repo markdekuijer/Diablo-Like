@@ -56,7 +56,7 @@ public class EnemyMovement : MonoBehaviour
 
     public void HandleMovementSpeed()
     {
-        brain.animHook.walking = !agent.isStopped;
+        brain.animHook.walking = agent.velocity.magnitude > 0.1f;
         if (isSlowed)
         {
             slowDuration -= Time.deltaTime;
@@ -92,6 +92,10 @@ public class EnemyMovement : MonoBehaviour
         {
             agent.SetDestination(moveTarget.transform.position);
             inRange = Vector3.Distance(moveTarget.transform.position, transform.position) < hitRange;
+        }
+        else
+        {
+            inRange = false;
         }
     }
     public void SetTarget(GameObject g)

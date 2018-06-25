@@ -5110,6 +5110,10 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2037840, guid: 8af0b150f56a1d641bdea997d494825a, type: 2}
+      propertyPath: orthographic
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11444572, guid: 8af0b150f56a1d641bdea997d494825a, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 8af0b150f56a1d641bdea997d494825a, type: 2}

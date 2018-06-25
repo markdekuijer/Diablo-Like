@@ -10,7 +10,9 @@ public class ArcherBlizardProjectile : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            other.GetComponent<EnemyMovement>().GiveSlow(slowAmount, Mathf.Infinity);
+            EnemyBrain b = other.GetComponent<EnemyBrain>();
+            b.movement.GiveSlow(slowAmount, Mathf.Infinity);
+            b.animHook.SetAnimSpeed(0.4f);
         }
     }
 
@@ -18,7 +20,9 @@ public class ArcherBlizardProjectile : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            other.GetComponent<EnemyMovement>().slowDuration = 0;
+            EnemyBrain b = other.GetComponent<EnemyBrain>();
+            b.movement.slowDuration = 0;
+            b.animHook.SetAnimSpeed(1f);
         }
     }
 }

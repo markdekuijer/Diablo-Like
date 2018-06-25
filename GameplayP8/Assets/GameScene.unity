@@ -22683,6 +22683,8 @@ MonoBehaviour:
   hasGoal: 0
   interactionGoal: {fileID: 0}
   interactionthreshold: 2
+  characterStats: {fileID: 0}
+  currentLevel: 1
 --- !u!114 &1078938323
 MonoBehaviour:
   m_ObjectHideFlags: 0

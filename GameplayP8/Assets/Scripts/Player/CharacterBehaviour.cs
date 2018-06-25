@@ -40,9 +40,14 @@ public class CharacterBehaviour : MonoBehaviour
     [SerializeField] private bool hasGoal;
     [SerializeField] private GameObject interactionGoal;
     [SerializeField] private float interactionthreshold = 0.1f;
+    public CharStats characterStats;
+    public int currentLevel;
 
     private void Start()
     {
+        string statsString = "ArcherLevel";
+        statsString += currentLevel.ToString();
+        characterStats = ScriptableObject.CreateInstance(statsString) as CharStats;
         characterMovement.Init(agent, cam, this);
         characterAttack.Init(this);
     }

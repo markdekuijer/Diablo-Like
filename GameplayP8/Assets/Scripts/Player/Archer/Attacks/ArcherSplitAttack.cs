@@ -14,8 +14,11 @@ public class ArcherSplitAttack : BasicAASkill
     private Transform bonusEnemy1;
     private Transform bonusEnemy2;
 
-    public override void Execute(GameObject target = null)
+    private float realDmg;
+
+    public override void Execute(CharacterBehaviour behaviour, GameObject target = null)
     {
+        realDmg = behaviour.CalculateAADamage(damage);
         Collider[] hitColliders = Physics.OverlapSphere(target.transform.position, radius, mask);
         for (int i = 0; i < hitColliders.Length; i++)
         {
@@ -69,9 +72,9 @@ public class ArcherSplitAttack : BasicAASkill
         if (manager != null)
         {
             if (projectile.name != "miniArrow")
-                manager.Damage(damage , null, gameObject);
+                manager.Damage(realDmg, null, gameObject);
             else
-                manager.Damage((damage / 100) * 75, null, gameObject);
+                manager.Damage((realDmg / 100) * 75, null, gameObject);
         }
         projectile.SetActive(false);
     }

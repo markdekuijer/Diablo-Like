@@ -10,8 +10,11 @@ public class ArcherAoeAttack : BasicAASkill
     public float radius;
     public LayerMask mask;
 
-    public override void Execute(GameObject target = null)
+    private float realDmg;
+
+    public override void Execute(CharacterBehaviour behaviour, GameObject target = null)
     {
+        realDmg = behaviour.CalculateAADamage(damage);
         GameObject arrow = Instantiate<GameObject>(prefab, transform.position + new Vector3(0, 0.5f, 0), Quaternion.Euler(0, target.transform.position.y, 0));
         arrow.GetComponent<ProjectileMovement>().Init(this, target.transform.position, projectileSpeed);
     }
@@ -21,7 +24,7 @@ public class ArcherAoeAttack : BasicAASkill
         Collider[] hitColliders = Physics.OverlapSphere(manager.gameObject.transform.position, radius, mask);
         for (int i = 0; i < hitColliders.Length; i++)
         {
-            hitColliders[i].gameObject.GetComponent<HealthManager>().Damage(damage, null, gameObject);
+            hitColliders[i].gameObject.GetComponent<HealthManager>().Damage(realDmg, null, gameObject);
         }
         projectile.SetActive(false);
     }

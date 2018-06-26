@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.574817, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -16499,7 +16499,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh57868
+  m_Name: pb_Mesh58014
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -16960,6 +16960,7 @@ GameObject:
   - component: {fileID: 558658914}
   - component: {fileID: 558658913}
   - component: {fileID: 558658917}
+  - component: {fileID: 558658918}
   m_Layer: 0
   m_Name: Testbox
   m_TagString: Enemy
@@ -17052,6 +17053,31 @@ MonoBehaviour:
   currentHealth: 0
   totalHealth: 0
   isDead: 0
+--- !u!114 &558658918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 558658912}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9d3a85d45a14194c9177eeba16fc1f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 0}
+  speed: 0
+  pos1: {x: 0, y: 0, z: 0}
+  pos2: {x: 0, y: 0, z: 0}
+  brain: {fileID: 0}
+  isRooted: 0
+  isSlowed: 0
+  inRange: 0
+  inAttack: 0
+  ignoreWaypoints: 0
+  hitRange: 0
+  moveTarget: {fileID: 0}
+  slowDuration: 0
+  slowAmount: 0
 --- !u!1 &561487347
 GameObject:
   m_ObjectHideFlags: 0
@@ -22684,6 +22710,7 @@ MonoBehaviour:
   interactionGoal: {fileID: 0}
   interactionthreshold: 2
   characterStats: {fileID: 0}
+  currentWeaponStats: {fileID: 0}
   currentLevel: 1
 --- !u!114 &1078938323
 MonoBehaviour:
@@ -30319,6 +30346,7 @@ GameObject:
   - component: {fileID: 2043407651}
   - component: {fileID: 2043407650}
   - component: {fileID: 2043407657}
+  - component: {fileID: 2043407659}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
@@ -30495,6 +30523,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &2043407659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2043407648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b09c68f3ac1b2f469fae5fa67e03e96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2048788130 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 167990, guid: 1915ba71ef127a84fb6bb20ebda36f1e, type: 2}

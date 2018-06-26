@@ -11,9 +11,11 @@ public class ArcherSprayAttack : BasicAASkill
     public float spread;
     public int projectileAmount;
 
-    public override void Execute(GameObject target = null)
-    {
+    private float realDmg;
 
+    public override void Execute(CharacterBehaviour behaviour, GameObject target = null)
+    {
+        realDmg = behaviour.CalculateAADamage(damage);
         for (int i = 0; i < 15; i++)
         {
             GameObject arrow = Instantiate<GameObject>(prefab, transform.position + new Vector3(0,0.5f,0), Quaternion.Euler(0, target.transform.position.y + (-7 + i), 0));
@@ -25,7 +27,7 @@ public class ArcherSprayAttack : BasicAASkill
     {
         if(manager != null)
         {
-            manager.Damage(damage, null, gameObject);
+            manager.Damage(realDmg, null, gameObject);
         }
         projectile.SetActive(false);
     }

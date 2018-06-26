@@ -85,7 +85,7 @@ public abstract class BasicAASkill : Skill
     public virtual void DealDamage(HealthManager manager = null, GameObject projectile = null)
     {
     }
-    public abstract void Execute(GameObject target = null);
+    public abstract void Execute(CharacterBehaviour behaviour, GameObject target = null);
 }
 
 public abstract class AbbilitySkill : Skill

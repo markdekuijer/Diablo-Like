@@ -31,7 +31,9 @@ public class CharacterBehaviour : MonoBehaviour
     [SerializeField] private bool isStatic;
     [SerializeField] private bool isSlowed;
     [SerializeField] private bool isDead;
-    [SerializeField] private bool isApproachingEnemy;//dit gaat nog nooit false, maar zou ook nooit true moeten zijn voor ranged characters
+    //dit gaat nog nooit false, maar zou ook nooit true moeten zijn voor ranged
+    //characters
+    [SerializeField] private bool isApproachingEnemy;
     public bool isMoving;
     public bool isAttacking;
 
@@ -41,13 +43,15 @@ public class CharacterBehaviour : MonoBehaviour
     [SerializeField] private GameObject interactionGoal;
     [SerializeField] private float interactionthreshold = 0.1f;
     public CharStats characterStats;
+    public WeaponStats currentWeaponStats;
     public int currentLevel;
 
     private void Start()
     {
         string statsString = "ArcherLevel";
         statsString += currentLevel.ToString();
-        characterStats = ScriptableObject.CreateInstance(statsString) as CharStats;
+        characterStats = Resources.Load<CharStats>("ScriptableStuff/CharacterStats/" + statsString);
+        currentWeaponStats = Resources.Load<WeaponStats>("ScriptableStuff/Bows/Lvl1_BowCommon_V1");
         characterMovement.Init(agent, cam, this);
         characterAttack.Init(this);
     }
@@ -195,4 +199,11 @@ public class CharacterBehaviour : MonoBehaviour
     }
 
     #endregion
+
+    public float CalculateAADamage(float dmg)
+    {
+        float returnDmg = 0;
+        returnDmg = (dmg * currentWeaponStats.damage);
+        return returnDmg;
+    }
 }

@@ -27,6 +27,6 @@ public class ArcherAttack : CharacterAttack
 
     public override void Attack(GameObject target)
     {
-        currentAA.Execute(target);
+        currentAA.Execute(behaviour , target);
     }
 }

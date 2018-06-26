@@ -32,3 +32,8 @@ public class EnemyBrain : MonoBehaviour
         groupBrain.AlertOthers(this, target);
     }
 }
+
+public static class ExpClass
+{
+
+}

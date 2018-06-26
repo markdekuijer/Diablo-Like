@@ -10,8 +10,11 @@ public class ArcherLifestealAttack : BasicAASkill
     public float lifesteal;
     public HealthManager myHealth;
 
-    public override void Execute(GameObject target = null)
+    private float realDmg;
+
+    public override void Execute(CharacterBehaviour behaviour, GameObject target = null)
     {
+        realDmg = behaviour.CalculateAADamage(damage);
         GameObject arrow = Instantiate<GameObject>(prefab, transform.position + new Vector3(0, 0.5f, 0), Quaternion.Euler(0, target.transform.position.y, 0));
         arrow.GetComponent<ProjectileMovement>().Init(this, target.transform.position, projectileSpeed);
     }
@@ -19,7 +22,7 @@ public class ArcherLifestealAttack : BasicAASkill
     public override void DealDamage(HealthManager manager, GameObject projectile)
     {
         myHealth.HealSingle(lifesteal, 0); //lifesteal * playerlevel + lifesteal stats
-        manager.Damage(damage , null, gameObject);
+        manager.Damage(realDmg, null, gameObject);
         gameObject.SetActive(false);
     }
 }

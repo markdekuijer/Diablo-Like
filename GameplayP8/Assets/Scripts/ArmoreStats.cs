@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ArmoreStats", menuName = "Stats/Armore")]
-public class ArmoreStats : ScriptableObject
+public class ArmoreStats : Drops
 {
     public string setName;
     public float armore;

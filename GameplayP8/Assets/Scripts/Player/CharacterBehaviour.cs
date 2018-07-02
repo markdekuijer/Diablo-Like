@@ -43,7 +43,8 @@ public class CharacterBehaviour : MonoBehaviour
     [SerializeField] private GameObject interactionGoal;
     [SerializeField] private float interactionthreshold = 0.1f;
     public CharStats characterStats;
-    public WeaponStats currentWeaponStats;
+    public static WeaponStats currentWeaponStats; //TODO dit net static gemaakt voor ItemDrop en DroppedItem
+    public static ArmoreStats currentArmoreStats;
     public int currentLevel;
 
     private void Start()

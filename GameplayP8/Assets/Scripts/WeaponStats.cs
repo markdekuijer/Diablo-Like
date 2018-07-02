@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "WeaponStats", menuName = "Stats/Weapon")]
-public class WeaponStats : ScriptableObject
+public class WeaponStats : Drops
 {
     public string setName;
     public float damage;

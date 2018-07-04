@@ -4735,7 +4735,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 999
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -21242,7 +21242,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -516}
-  m_SizeDelta: {x: 1100, y: 8}
+  m_SizeDelta: {x: 1110, y: 8}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &769821768
 MonoBehaviour:
@@ -22566,7 +22566,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 999
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -22905,7 +22905,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 999
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -24491,6 +24491,7 @@ GameObject:
   - component: {fileID: 1078938316}
   - component: {fileID: 1078938339}
   - component: {fileID: 1078938322}
+  - component: {fileID: 1078938340}
   - component: {fileID: 1078938323}
   - component: {fileID: 1078938315}
   - component: {fileID: 1078938324}
@@ -24659,7 +24660,6 @@ MonoBehaviour:
   hasGoal: 0
   interactionGoal: {fileID: 0}
   interactionthreshold: 2
-  characterStats: {fileID: 0}
   stats: {fileID: 0}
   currentLevel: 1
 --- !u!114 &1078938323
@@ -25003,6 +25003,19 @@ MonoBehaviour:
   afkDuration: 10
   behaviour: {fileID: 1078938322}
   anim: {fileID: 245734727}
+--- !u!114 &1078938340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1078938314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e855dfde7d5e9e4ea23fd41a2f8c82a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expImage: {fileID: 1711671709}
+  maxLevel: 3
 --- !u!1 &1086815585
 GameObject:
   m_ObjectHideFlags: 0
@@ -26491,7 +26504,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 999
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -31234,12 +31247,12 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 3d8675433a508ec47b8f895201eacf20, type: 3}
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillMethod: 0
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
 --- !u!222 &1711671710
@@ -34678,7 +34691,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 999
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

@@ -202,7 +202,7 @@ public class CharacterBehaviour : MonoBehaviour
 
     public void HandleAnimations()
     {
-        if (agent.velocity == Vector3.zero)
+        if (agent.velocity.magnitude <= 3f)
             isMoving = false;
         else
             isMoving = true;

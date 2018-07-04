@@ -12,6 +12,7 @@ public class HealthManager : MonoBehaviour
     [SerializeField] private float minHealth;
     [SerializeField] private float maxShield;
     [SerializeField] private float minShield;
+    [SerializeField] private ItemDrop itemDrop;
 
     public event Action<float, HealthManager, GameObject> DamageEvent;
 
@@ -19,7 +20,11 @@ public class HealthManager : MonoBehaviour
     private float currentShield, totalShield;
     public bool isDead;
 
-	void Start()
+    public float GetMaxHp { get { return totalHealth; } }
+    public float GetCurrentHp { get { return currentHealth; } }
+
+
+    void Start()
     {
         DamageEvent += TakeDamage;
 
@@ -108,6 +113,8 @@ public class HealthManager : MonoBehaviour
         //handleDeathWithPool
         //deathAnimationCorotaine
         isDead = true;
+        if(itemDrop != null)
+            itemDrop.DropItemChange();
         gameObject.SetActive(false);
     }
 }

@@ -18,6 +18,9 @@ public class ProjectileMovement : MonoBehaviour
 	void Update ()
     {
         transform.position += transform.forward * projectileSpeed * Time.deltaTime;
+        
+        if (Vector3.Distance(transform.position, CharacterBehaviour.currentPosition) > 50)
+            gameObject.SetActive(false);
 	}
 
     public void OnTriggerEnter(Collider other)

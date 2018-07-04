@@ -18,7 +18,10 @@ public class ArcherSprayAttack : BasicAASkill
         realDmg = behaviour.CalculateAADamage(damage);
         for (int i = 0; i < 15; i++)
         {
-            GameObject arrow = Instantiate<GameObject>(prefab, transform.position + new Vector3(0,0.5f,0), Quaternion.Euler(0, target.transform.position.y + (-7 + i), 0));
+            GameObject arrow = ObjectPooler.SharedInstance.GetPooledObject(1);
+            arrow.SetActive(true);
+            arrow.transform.position = transform.position + new Vector3(0, 0.5f, 0);
+            arrow.transform.rotation = Quaternion.Euler(0, target.transform.position.y + (-7 + i), 0);
             arrow.GetComponent<ProjectileMovement>().Init(this, target.transform.position, projectileSpeed, -7 + i);
         }
     }

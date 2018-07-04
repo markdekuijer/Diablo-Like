@@ -30,7 +30,6 @@ public class DamageShow : MonoBehaviour
     private void Update()
     {
         colorAlpha -= 200f * Time.deltaTime;
-        print(colorAlpha);
     }
 
     void OnEnable()

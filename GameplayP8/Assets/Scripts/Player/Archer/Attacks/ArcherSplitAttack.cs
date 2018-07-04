@@ -29,24 +29,31 @@ public class ArcherSplitAttack : BasicAASkill
         if(positions.Count > 0)
         {
             bonusEnemy1 = GetClosestEnemy(positions.ToArray());
-            GameObject miniArrow1 = Instantiate<GameObject>(prefab, transform.position + new Vector3(0, 0.5f, 0), Quaternion.Euler(0, bonusEnemy1.position.y, 0));
+            GameObject miniArrow1 = ObjectPooler.SharedInstance.GetPooledObject(1);
+            miniArrow1.SetActive(true);
+            miniArrow1.transform.position = transform.position + new Vector3(0, 0.5f, 0);
+            miniArrow1.transform.rotation = Quaternion.Euler(0, bonusEnemy1.position.y, 0);
             miniArrow1.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             miniArrow1.GetComponent<ProjectileMovement>().Init(this, bonusEnemy1.position, projectileSpeed);
-            miniArrow1.name = "miniArrow";
             positions.Remove(bonusEnemy1);
         }
 
         if (positions.Count > 0)
         {
             bonusEnemy2 = GetClosestEnemy(positions.ToArray());
-            GameObject miniArrow2 = Instantiate<GameObject>(prefab, transform.position + new Vector3(0, 0.5f, 0), Quaternion.Euler(0, bonusEnemy2.position.y, 0));
+            GameObject miniArrow2 = ObjectPooler.SharedInstance.GetPooledObject(1);
+            miniArrow2.SetActive(true);
+            miniArrow2.transform.position = transform.position + new Vector3(0, 0.5f, 0);
+            miniArrow2.transform.rotation = Quaternion.Euler(0, bonusEnemy2.position.y, 0);
             miniArrow2.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             miniArrow2.GetComponent<ProjectileMovement>().Init(this, bonusEnemy2.position, projectileSpeed);
-            miniArrow2.name = "miniArrow";
             positions.Clear();
         }
 
-        GameObject arrow = Instantiate<GameObject>(prefab, transform.position + new Vector3(0, 0.5f, 0), Quaternion.Euler(0, target.transform.position.y, 0));
+        GameObject arrow = ObjectPooler.SharedInstance.GetPooledObject(1);
+        arrow.SetActive(true);
+        arrow.transform.position = transform.position + new Vector3(0, 0.5f, 0);
+        arrow.transform.rotation = Quaternion.Euler(0, target.transform.position.y, 0);
         arrow.GetComponent<ProjectileMovement>().Init(this, target.transform.position, projectileSpeed);
     }
 

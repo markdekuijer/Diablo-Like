@@ -4,28 +4,24 @@ using UnityEngine;
 
 public class ItemDrop : MonoBehaviour
 {
-    [SerializeField] private float dropChange;
+    [SerializeField] private float dropChance;
     [SerializeField] private List<Drops> drops = new List<Drops>();
     [SerializeField] private GameObject itemDropPrefab;
     public Drops d;
 
-    private void Start()
-    {
-        GetDropItem();
-    }
-
     public void DropItemChange()
     {
-        if (Random.Range(0, 100) < dropChange)
+        if (Random.Range(0, 100) <= dropChance)
         {
             int i = Random.Range(0, 5);
             if (i >= 4)
                 GetDropItem(Random.Range(1, 3));
             else
                 GetDropItem();
+
         }
 
-        DropMoney();
+        //DropMoney();
     }
 
     public void GetDropItem(int iterations = 1)
@@ -33,6 +29,8 @@ public class ItemDrop : MonoBehaviour
         for (int i = 0; i < iterations; i++)
         {
             d = drops[Random.Range(0, drops.Count)];
+            DroppedItem item = Instantiate(itemDropPrefab, transform.position, Quaternion.Euler(0,0,0)).GetComponent<DroppedItem>();
+            item.Init(d);
         }
     }
 

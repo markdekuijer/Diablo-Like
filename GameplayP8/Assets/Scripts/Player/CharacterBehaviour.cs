@@ -45,7 +45,10 @@ public class CharacterBehaviour : MonoBehaviour
     public CharStats characterStats;
     public static WeaponStats currentWeaponStats; //TODO dit net static gemaakt voor ItemDrop en DroppedItem
     public static ArmoreStats currentArmoreStats;
+    public static Vector3 currentPosition;
+    public WeaponStats stats;
     public int currentLevel;
+
 
     private void Start()
     {
@@ -77,6 +80,7 @@ public class CharacterBehaviour : MonoBehaviour
 
     public void GetBaseInput()
     {
+        currentPosition = transform.position;
         RaycastHit hit;
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 

@@ -45,6 +45,7 @@ public class EnemyAttack : MonoBehaviour
         else attackString += "_C";
 
         brain.animHook.PlayAnim(attackString);
+        brain.movement.isRooted = true;
     }
 
     public virtual void Attack()
@@ -60,6 +61,7 @@ public class EnemyAttack : MonoBehaviour
 
     public virtual void ReenableMovement()
     {
+        brain.movement.isRooted = false;
         brain.movement.inAttack = false;
     }
 }

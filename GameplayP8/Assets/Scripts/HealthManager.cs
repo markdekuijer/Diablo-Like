@@ -13,6 +13,7 @@ public class HealthManager : MonoBehaviour
     [SerializeField] private float maxShield;
     [SerializeField] private float minShield;
     [SerializeField] private ItemDrop itemDrop;
+    [SerializeField] private GameUIManager UI;
 
     public event Action<float, HealthManager, GameObject> DamageEvent;
 
@@ -38,8 +39,9 @@ public class HealthManager : MonoBehaviour
         }
         else
         {
-            totalHealth = 100;
+            totalHealth = CharacterBehaviour.characterStats.health;
             currentHealth = totalHealth;
+            UI.Init();
             //totalHealth = characterStats.totalHealth;
             //totalShield = characterStats.totalShield;
         }

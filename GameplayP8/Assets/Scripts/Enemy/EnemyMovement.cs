@@ -109,15 +109,20 @@ public class EnemyMovement : MonoBehaviour
     {
         if (isRooted)
         {
-            agent.speed = 0;
-            agent.velocity = Vector3.zero;
-            agent.isStopped = true;
+            BreakSpeed();
         }
         else
         {
             agent.speed = speed;
             agent.isStopped = false;
         }
+    }
+
+    public void BreakSpeed()
+    {
+        agent.speed = 0;
+        agent.velocity = Vector3.zero;
+        agent.isStopped = true;
     }
 }
 

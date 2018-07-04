@@ -24,6 +24,8 @@ public class DroppedItem : MonoBehaviour
     [SerializeField] private MeshFilter meshRenderer;
     [SerializeField] private Rigidbody rb;
 
+    [SerializeField] private Color common, epic, legendary;
+
     [Header("Stats")]
     public int level;
     public string setName;
@@ -64,17 +66,17 @@ public class DroppedItem : MonoBehaviour
             if (rarity == Rarity.common)
             {
                 rarityText.text = "Common";
-                rarityImage.color = Color.gray;
+                rarityImage.color = common;
             }
             else if (rarity == Rarity.rare)
             {
                 rarityText.text = "Rare";
-                rarityImage.color = Color.cyan;
+                rarityImage.color = epic;
             }
             else if (rarity == Rarity.legendary)
             {
                 rarityText.text = "Legendary";
-                rarityImage.color = Color.yellow;
+                rarityImage.color = legendary;
             }
         }
         else if(d is ArmoreStats)

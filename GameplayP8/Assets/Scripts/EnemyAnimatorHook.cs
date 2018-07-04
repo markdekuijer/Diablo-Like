@@ -16,7 +16,7 @@ public class EnemyAnimatorHook : MonoBehaviour
 
     public void PlayAnim(string animName)
     {
-        anim.CrossFade(animName, 0.1f);
+        anim.CrossFade(animName, 0.05f);
     }
 
     public void SetTrigger(string animName)

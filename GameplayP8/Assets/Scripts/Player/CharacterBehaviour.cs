@@ -42,15 +42,16 @@ public class CharacterBehaviour : MonoBehaviour
     [SerializeField] private bool hasGoal;
     [SerializeField] private GameObject interactionGoal;
     [SerializeField] private float interactionthreshold = 0.1f;
-    public CharStats characterStats;
+    public static CharStats characterStats;
     public static WeaponStats currentWeaponStats; //TODO dit net static gemaakt voor ItemDrop en DroppedItem
     public static ArmoreStats currentArmoreStats;
     public static Vector3 currentPosition;
     public WeaponStats stats;
     public int currentLevel;
 
+    private int exp;
 
-    private void Start()
+    private void Awake()
     {
         string statsString = "ArcherLevel";
         statsString += currentLevel.ToString();
@@ -62,18 +63,12 @@ public class CharacterBehaviour : MonoBehaviour
 
     void Update ()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+            ExpHandler.Instance.GiveExp(30);
         GetBaseInput();
         HandleGoals();
         HandleAnimations();
         characterAttack.Tick();
-    }
-
-    public void HandleAnimations()
-    {
-        if (agent.velocity == Vector3.zero)
-            isMoving = false;
-        else
-            isMoving = true;
     }
 
     #region Input
@@ -205,10 +200,19 @@ public class CharacterBehaviour : MonoBehaviour
 
     #endregion
 
+    public void HandleAnimations()
+    {
+        if (agent.velocity == Vector3.zero)
+            isMoving = false;
+        else
+            isMoving = true;
+    }
+
     public float CalculateAADamage(float dmg)
     {
         float returnDmg = 0;
         returnDmg = (dmg * currentWeaponStats.damage);
         return returnDmg;
     }
+
 }

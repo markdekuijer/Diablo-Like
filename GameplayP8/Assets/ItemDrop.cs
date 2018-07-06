@@ -9,8 +9,12 @@ public class ItemDrop : MonoBehaviour
     [SerializeField] private GameObject itemDropPrefab;
     public Drops d;
 
+    [SerializeField] private int exp;
+
     public void DropItemChange()
     {
+        ExpHandler.Instance.GiveExp(exp);
+
         if (Random.Range(0, 100) <= dropChance)
         {
             int i = Random.Range(0, 5);
@@ -29,7 +33,10 @@ public class ItemDrop : MonoBehaviour
         for (int i = 0; i < iterations; i++)
         {
             d = drops[Random.Range(0, drops.Count)];
-            DroppedItem item = Instantiate(itemDropPrefab, transform.position, Quaternion.Euler(0,0,0)).GetComponent<DroppedItem>();
+            DroppedItem item = ObjectPooler.SharedInstance.GetPooledObject(3).GetComponent<DroppedItem>();
+            item.gameObject.SetActive(true);
+            item.transform.position = transform.position;
+            item.transform.rotation = Quaternion.Euler(0, 0, 0);
             item.Init(d);
         }
     }

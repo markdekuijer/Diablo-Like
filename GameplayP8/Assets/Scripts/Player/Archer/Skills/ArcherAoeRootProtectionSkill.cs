@@ -14,13 +14,18 @@ public class ArcherAoeRootProtectionSkill : AbbilitySkill
     private List<EnemyMovement> enemys = new List<EnemyMovement>();
     private float maxDuration;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         maxDuration = duration;
     }
 
     public override void Init(Vector3 position = default(Vector3))
     {
+        if (GetCooldownProcent() > 0)
+            return;
+
+        cooldown = maxCooldown;
         enemys.Clear();
         Collider[] hitColliders = Physics.OverlapSphere(position, radius, mask);
         for (int i = 0; i < hitColliders.Length; i++)
@@ -45,7 +50,9 @@ public class ArcherAoeRootProtectionSkill : AbbilitySkill
 
     public override void Tick()
     {
-        if(duration >= 0)
+        cooldown -= Time.deltaTime;
+
+        if (duration >= 0)
         {
             duration -= Time.deltaTime;
             if(duration < 0)

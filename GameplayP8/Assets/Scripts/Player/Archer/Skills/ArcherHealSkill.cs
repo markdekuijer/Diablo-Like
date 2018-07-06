@@ -10,13 +10,18 @@ public class ArcherHealSkill : AbbilitySkill
     [SerializeField] private float duration;
     private float maxDuration;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         maxDuration = duration;
     }
 
     public override void Init(Vector3 position = default(Vector3))
     {
+        if (GetCooldownProcent() > 0)
+            return;
+
+        cooldown = maxCooldown;
         obj.transform.position = transform.position + Vector3.down;
         duration = maxDuration;
         healthManager.HealDubble(heal);
@@ -24,7 +29,9 @@ public class ArcherHealSkill : AbbilitySkill
 
     public override void Tick()
     {
-        if(duration >= 0)
+        cooldown -= Time.deltaTime;
+
+        if (duration >= 0)
         {
             obj.transform.position = transform.position + Vector3.down;
             duration -= Time.deltaTime;

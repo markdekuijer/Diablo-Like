@@ -14,13 +14,18 @@ public class ArcherAoeLifestealSkill : AbbilitySkill
 
     private float maxDuration;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         maxDuration = duration;
     }
 
     public override void Init(Vector3 position = default(Vector3))
     {
+        if (GetCooldownProcent() > 0)
+            return;
+
+        cooldown = maxCooldown;
         Collider[] hitColliders = Physics.OverlapSphere(position, radius, mask);
         for (int i = 0; i < hitColliders.Length; i++)
         {
@@ -38,6 +43,8 @@ public class ArcherAoeLifestealSkill : AbbilitySkill
 
     public override void Tick()
     {
+        cooldown -= Time.deltaTime;
+
         if (duration >= 0)
         {
             duration -= Time.deltaTime;

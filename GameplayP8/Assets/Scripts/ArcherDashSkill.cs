@@ -11,14 +11,19 @@ public class ArcherDashSkill : AbbilitySkill
 
     private float maxDuration;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         maxDuration = duration;
         duration = 0;
     }
 
     public override void Init(Vector3 position = default(Vector3))
     {
+        if (GetCooldownProcent() > 0)
+            return;
+
+        cooldown = maxCooldown;
         duration = maxDuration;
         movement.InitSpecialMovement();
         movement.SetSpeed(dashSpeed);
@@ -27,7 +32,9 @@ public class ArcherDashSkill : AbbilitySkill
 
     public override void Tick()
     {
-        if(duration > 0)
+        cooldown -= Time.deltaTime;
+
+        if (duration > 0)
         {
             duration -= Time.deltaTime;
             if (duration <= 0)

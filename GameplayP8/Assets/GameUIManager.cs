@@ -9,10 +9,15 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] private Image hpBar;
     [SerializeField] private Image glow;
 
+    [SerializeField] private GameObject basicAttacksMenu;
+    [SerializeField] private GameObject abbilityMenu;
+    [SerializeField] private GameObject presets;
+
+    public static bool Paused;
+
     public void Init()
     {
         hpBar.fillAmount = hpManager.GetMaxHp / hpManager.GetCurrentHp;
-        print(hpManager.GetMaxHp + "    |    " + hpManager.GetCurrentHp);
         hpManager.DamageEvent += UpdateHealth;
     }
 
@@ -21,8 +26,25 @@ public class GameUIManager : MonoBehaviour
         hpBar.fillAmount = hpManager.GetCurrentHp / hpManager.GetMaxHp;
         if (hpManager.GetCurrentHp <= 0)
             glow.gameObject.SetActive(false);
+    }
 
-        print(hpManager.GetMaxHp + "    |    " + hpManager.GetCurrentHp);
+    public void SwitchMenuSkillPreset()
+    {
+        abbilityMenu.SetActive(!abbilityMenu.activeSelf);
+        basicAttacksMenu.SetActive(!basicAttacksMenu.activeSelf);
+    }
 
+    public void OpenPresets()
+    {
+        Paused = true;
+        presets.SetActive(true);
+        basicAttacksMenu.SetActive(true);
+        abbilityMenu.SetActive(false);
+    }
+
+    public void ExitPresets()
+    {
+        Paused = false;
+        presets.SetActive(false);
     }
 }

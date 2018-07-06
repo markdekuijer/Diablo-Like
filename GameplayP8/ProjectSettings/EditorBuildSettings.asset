@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/MenuScene.unity
     guid: 1b80358d77ee1e64ba54597c70f11f54
-  - enabled: 1
+  - enabled: 0
     path: Assets/GameScene.unity
     guid: 342aeccb0f720fd4cb3bb5aa36dd016f
+  - enabled: 1
+    path: Assets/Art/Top-Down Dungeons 2/Demo/Demo.unity
+    guid: 7fda9afa621104b46a6cc035658f675a

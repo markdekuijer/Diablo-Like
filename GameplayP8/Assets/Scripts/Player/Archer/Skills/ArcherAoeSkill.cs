@@ -15,8 +15,17 @@ public class ArcherAoeSkill : AbbilitySkill
     private float iterationTime;
     private float maxIterationTime;
 
+    protected override void Start()
+    {
+        base.Start();
+    }
+
     public override void Init(Vector3 position = default(Vector3))
     {
+        if (GetCooldownProcent() > 0)
+            return;
+
+        cooldown = maxCooldown;
         obj.transform.position = transform.position + Vector3.down;
         iterationsLeft = iterations;
         iterationTime = totalDuration / iterations;
@@ -26,6 +35,7 @@ public class ArcherAoeSkill : AbbilitySkill
     public override void Tick ()
     {
         //obj.Play();
+        cooldown -= Time.deltaTime;
         obj.transform.position = transform.position + Vector3.down;
         iterationTime -= Time.deltaTime;
         if(iterationTime <= 0 && iterationsLeft > 0)

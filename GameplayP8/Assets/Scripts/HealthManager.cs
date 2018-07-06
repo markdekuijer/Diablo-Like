@@ -40,6 +40,8 @@ public class HealthManager : MonoBehaviour
         else
         {
             totalHealth = CharacterBehaviour.characterStats.health;
+            maxShield = 0;
+            currentShield = 0;
             currentHealth = totalHealth;
             UI.Init();
             //totalHealth = characterStats.totalHealth;

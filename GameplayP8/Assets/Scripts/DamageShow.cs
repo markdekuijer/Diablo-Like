@@ -23,7 +23,6 @@ public class DamageShow : MonoBehaviour
             rb.velocity = new Vector3(0, 1, 0.75f);
         else
             rb.velocity = new Vector3(0, 1, -0.75f);
-        print(rb.velocity);
 
     }
 

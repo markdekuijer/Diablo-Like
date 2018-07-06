@@ -108,6 +108,12 @@ public class DroppedItem : MonoBehaviour
     {
         if (Vector3.Distance(CharacterBehaviour.currentPosition, transform.position) < 2)
         {
+            DroppedItem item = ObjectPooler.SharedInstance.GetPooledObject(3).GetComponent<DroppedItem>();
+            item.gameObject.SetActive(true);
+            item.transform.position = transform.position;
+            item.transform.rotation = Quaternion.Euler(0, 0, 0);
+            item.Init(CharacterBehaviour.currentWeaponStats);
+
             if (weaponStats != null)
                 CharacterBehaviour.currentWeaponStats = weaponStats;
             else if (armoreStats != null)

@@ -22,7 +22,6 @@ public class ExpHandler : MonoBehaviour
     private void Start()
     {
         currentLevel = CharacterBehaviour.characterStats.associatedLevel;
-        print(CharacterBehaviour.characterStats.xpNeeded);
     }
 
     public void GiveExp(int earnedExp)

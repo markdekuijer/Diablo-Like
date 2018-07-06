@@ -30,9 +30,7 @@ public class CharacterBehaviour : MonoBehaviour
     [Header("States")]
     [SerializeField] private bool isStatic;
     [SerializeField] private bool isSlowed;
-    [SerializeField] private bool isDead;
-    //dit gaat nog nooit false, maar zou ook nooit true moeten zijn voor ranged
-    //characters
+    [SerializeField] private bool isDead; //dit gaat nog nooit false, maar zou ook nooit true moeten zijn voor ranged characters
     [SerializeField] private bool isApproachingEnemy;
     public bool isMoving;
     public bool isAttacking;
@@ -53,6 +51,7 @@ public class CharacterBehaviour : MonoBehaviour
 
     private void Awake()
     {
+        Application.targetFrameRate = 60;
         string statsString = "ArcherLevel";
         statsString += currentLevel.ToString();
         characterStats = Resources.Load<CharStats>("ScriptableStuff/CharacterStats/" + statsString);
@@ -75,6 +74,9 @@ public class CharacterBehaviour : MonoBehaviour
 
     public void GetBaseInput()
     {
+        if (GameUIManager.Paused)
+            return;
+
         currentPosition = transform.position;
         RaycastHit hit;
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -84,7 +86,7 @@ public class CharacterBehaviour : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
                 HandleDirectInput(hit);
             if (Input.GetMouseButtonDown(1))
-                HandleSecondaryInput();
+                HandleSecondaryInput(hit);
 
             HandleIndirectInput();
         }
@@ -99,10 +101,30 @@ public class CharacterBehaviour : MonoBehaviour
     public void GetAbbilityInput(RaycastHit hit)
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
-            characterAttack.currentAbbility.Init(hit.point);
-
-        for (int i = 0; i < characterAttack.abbilityAttacks.Count; i++)
         {
+            if(characterAttack.abbilityAttacks[0] != null)
+                characterAttack.abbilityAttacks[0].Init(hit.point);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if (characterAttack.abbilityAttacks[1] != null)
+                characterAttack.abbilityAttacks[1].Init(hit.point);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            if (characterAttack.abbilityAttacks[2] != null)
+                characterAttack.abbilityAttacks[2].Init(hit.point);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            if (characterAttack.abbilityAttacks[3] != null)
+                characterAttack.abbilityAttacks[3].Init(hit.point);
+        }
+
+        for (int i = 0; i < characterAttack.abbilityAttacks.Length; i++)
+        {
+            if (characterAttack.abbilityAttacks[i] == null)
+                continue;
             characterAttack.abbilityAttacks[i].Tick();
         }
     }
@@ -123,15 +145,16 @@ public class CharacterBehaviour : MonoBehaviour
             {
                 if (Input.GetKey(KeyCode.LeftShift))
                 {
-                    GameObject g = new GameObject(); //TODO make pool van ongeveer 20 voor invisable objects so you can find the target pos. inplaats van de pivot van het geraakte OBJ
+                    GameObject g = ObjectPooler.SharedInstance.GetPooledObject(4); //TODO make pool van ongeveer 20 voor invisable objects so you can find the target pos. inplaats van de pivot van het geraakte OBJ
                     g.transform.position = hit.point;
                     characterAttack.target = g;
+                    g.SetActive(false);
                 }
                 else
                 {
                     characterAttack.target = hit.transform.gameObject;
                 }
-                characterAttack.InitAttack();
+                characterAttack.InitAttack(0);
             }
             else
             {
@@ -147,9 +170,18 @@ public class CharacterBehaviour : MonoBehaviour
         }
     }
 
-    public void HandleSecondaryInput()
+    public void HandleSecondaryInput(RaycastHit hit)
     {
-        print("need to make this");
+        hasGoal = false;
+        interactionGoal = null;
+        if (isRangedCharacter)
+        {
+            GameObject g = ObjectPooler.SharedInstance.GetPooledObject(4);
+            g.transform.position = hit.point;
+            characterAttack.target = g;
+            g.SetActive(false);
+            characterAttack.InitAttack(1);
+        }
     }
 
     public void HandleIndirectInput()

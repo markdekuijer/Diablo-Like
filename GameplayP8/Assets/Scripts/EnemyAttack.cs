@@ -52,8 +52,7 @@ public class EnemyAttack : MonoBehaviour
     {
         if(Vector3.Distance(transform.position, brain.movement.moveTarget.transform.position) < maxAttackRange)
         {
-            brain.movement.moveTarget.GetComponent<HealthManager>().Damage(dmg,brain.movement.moveTarget.GetComponent<HealthManager>());
-            print("Dealth Dmg");
+            brain.movement.moveTarget.GetComponent<HealthManager>().Damage(dmg,brain.health);
         }
         else
             print("Missed Attack");

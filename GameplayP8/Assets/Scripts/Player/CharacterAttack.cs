@@ -10,11 +10,8 @@ public class CharacterAttack : MonoBehaviour
 
     [Header("Variables")]
     [SerializeField] private float inAttackDuration;
-    public List<BasicAASkill> basicAttacks = new List<BasicAASkill>();
-    public List<AbbilitySkill> abbilityAttacks = new List<AbbilitySkill>();
-    public BasicAASkill currentAA;
-    public AbbilitySkill currentAbbility;
-
+    public BasicAASkill[] basicAttacks = new BasicAASkill[2];
+    public AbbilitySkill[] abbilityAttacks = new AbbilitySkill[4];
     [HideInInspector] public GameObject target;
     protected CharacterBehaviour behaviour;
 
@@ -28,18 +25,21 @@ public class CharacterAttack : MonoBehaviour
         maxInAttackDuration = inAttackDuration;
     }
 
-    public void InitAttack()
+    public void InitAttack(int attackIndex)
     {
+        if (attackSpeed > 0 || basicAttacks[attackIndex] == null)
+            return;
+
         inAttackDuration = maxInAttackDuration;
         behaviour.isAttacking = true;
         behaviour.StopMovement();
         behaviour.anim.TriggerAnim("Attack");
         attackSpeed = maxAttackSpeed;
         this.transform.LookAt(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z));
-        Attack(target);//removeThisLaterWhenAnimsExist
+        Attack(target, attackIndex);//removeThisLaterWhenAnimsExist
     }
 
-    public virtual void Attack(GameObject target)
+    public virtual void Attack(GameObject target, int attackIndex)
     {
         //getCurrentSkill
         //takeThatEffect
@@ -59,14 +59,20 @@ public class CharacterAttack : MonoBehaviour
         }
     }
 
+    public float GetAttackspeedAmount()
+    {
+        if (attackSpeed > 0)
+            return (attackSpeed / maxAttackSpeed);
+        else
+            return 0;
+    }
+
     public void HandleAttackTarget()
     {
         if(Vector3.Distance(transform.position,target.transform.position) <= range)
         {
-            if (attackSpeed > 0)
-                return;
-            
-            InitAttack();
+           InitAttack(0); //TODO hardcoded to fix errrors for archer
+                          //have to fix this later
         }
         else
         {
@@ -76,10 +82,12 @@ public class CharacterAttack : MonoBehaviour
     }
 }
 
+[System.Serializable]
 public abstract class Skill : MonoBehaviour
 {
 }
 
+[System.Serializable]
 public abstract class BasicAASkill : Skill
 {
     public virtual void DealDamage(HealthManager manager = null, GameObject projectile = null)
@@ -88,13 +96,35 @@ public abstract class BasicAASkill : Skill
     public abstract void Execute(CharacterBehaviour behaviour, GameObject target = null);
 }
 
+[System.Serializable]
 public abstract class AbbilitySkill : Skill
 {
+    public float cooldown;
+    protected float maxCooldown;
+
+    protected virtual void Start()
+    {
+        maxCooldown = cooldown;
+    }
+
     public virtual void Init(Vector3 position = default(Vector3))
     {
     }
     public virtual void Tick()
     {
+    }
+    public float GetCooldownProcent()
+    {
+        if (cooldown > 0f)
+        {
+            return ((float)cooldown / (float)maxCooldown);
+        }
+        else
+            return 0f;
+    }
+    public float GetCooldown()
+    {
+        return cooldown;
     }
 }
 

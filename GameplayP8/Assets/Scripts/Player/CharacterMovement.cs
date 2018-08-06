@@ -33,8 +33,12 @@ public class CharacterMovement : MonoBehaviour
 
         agent.speed = movementSpeed;
 	}
-	
-	public void SetMoveTarget(Vector3 position)
+
+    private void Update()
+    {
+    }
+
+    public void SetMoveTarget(Vector3 position)
     {
         currentTarget = position;
         agent.SetDestination(position);

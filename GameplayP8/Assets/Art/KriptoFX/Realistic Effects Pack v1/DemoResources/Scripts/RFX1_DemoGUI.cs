@@ -17,7 +17,7 @@ public class RFX1_DemoGUI : MonoBehaviour
     public GameObject MobileCharacter;
     public GameObject Target;
     public Color guiColor = Color.red;
-    public RFX1_DistortionAndBloom RFX1_DistortionAndBloom;
+
 
     private int currentNomber;
 	private GameObject currentInstance;
@@ -52,7 +52,6 @@ public class RFX1_DemoGUI : MonoBehaviour
 	    startReflectionIntencity = RenderSettings.reflectionIntensity;
 	    startLightShadows = Sun.shadows;
 
-	    RFX1_DistortionAndBloom = Camera.main.GetComponent<RFX1_DistortionAndBloom>();
 
 	}
 

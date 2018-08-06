@@ -17,7 +17,20 @@ public class ArrowSkillPreset : MonoBehaviour
     [SerializeField] private BasicAASkill basicAASkill;
     [SerializeField] private DisplayCouldown couldown;
 
+    public bool autoEquip;
+
     private bool equiped;
+
+    private void Awake()
+    {
+        if (autoEquip)
+            Equip();
+    }
+
+    private void Start()
+    {
+        transform.parent.parent.gameObject.SetActive(false) ;
+    }
 
     public void Equip()
     {
@@ -27,7 +40,6 @@ public class ArrowSkillPreset : MonoBehaviour
             return;
         }
 
-        //couldown.SetImage(image);
         if (basicAASkill != null)
         {
             for (int i = 0; i < character.basicAttacks.Length; i++)

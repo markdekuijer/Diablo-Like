@@ -50,6 +50,12 @@ public class HealthManager : MonoBehaviour
 
 	}
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q) && isPlayer)
+            MaxHP();
+    }
+
     public void HealSingle(float hpHeal, float shieldHeal)
     {
         currentHealth += hpHeal;
@@ -71,6 +77,11 @@ public class HealthManager : MonoBehaviour
             currentHealth += hpHeal;
             currentShield += shieldHeal;
         }
+    }
+
+    public void MaxHP()
+    {
+        currentHealth = 100;
     }
 
     public void Damage(float dmg, HealthManager h = null, GameObject g = null)
@@ -109,6 +120,7 @@ public class HealthManager : MonoBehaviour
 
     public void PlayerDeath()
     {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
         isDead = true;
     }
 

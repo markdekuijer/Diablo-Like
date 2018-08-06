@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class EnemyGroupManager : MonoBehaviour
 {
-    [SerializeField] private List<EnemyBrain> enemys = new List<EnemyBrain>();
+    [SerializeField] private EnemyBrain[] enemys;
 
     private void Start()
     {
-        for (int i = 0; i < enemys.Count; i++)
+        enemys = GetComponentsInChildren<EnemyBrain>();
+        for (int i = 0; i < enemys.Length; i++)
         {
             enemys[i].Init(this);
         }
@@ -16,7 +17,7 @@ public class EnemyGroupManager : MonoBehaviour
 
     private void Update()
     {
-        for (int i = 0; i < enemys.Count; i++)
+        for (int i = 0; i < enemys.Length; i++)
         {
             if(enemys[i].health.isDead)
                 continue;
@@ -27,7 +28,7 @@ public class EnemyGroupManager : MonoBehaviour
 
     public void AlertOthers(EnemyBrain e, GameObject target)
     {
-        for (int i = 0; i < enemys.Count; i++)
+        for (int i = 0; i < enemys.Length; i++)
         {
             enemys[i].movement.moveTarget = target;
             enemys[i].alerted = true;

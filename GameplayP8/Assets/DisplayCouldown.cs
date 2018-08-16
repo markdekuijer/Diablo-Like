@@ -13,11 +13,6 @@ public class DisplayCouldown : MonoBehaviour
     [SerializeField] private Image displayImage;
     [SerializeField] private TextMeshProUGUI text;
 
-	void Start ()
-    {
-		
-	}
-
     public void SetImage(Sprite s)
     {
         displayImage.sprite = s;

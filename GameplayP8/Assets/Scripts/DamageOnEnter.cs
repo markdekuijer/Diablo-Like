@@ -13,7 +13,7 @@ public class DamageOnEnter : MonoBehaviour
             HealthManager hp = other.gameObject.GetComponent<HealthManager>();
             if(hp != null)
             {
-                hp.Damage(dmg , null, playerObj);
+                hp.Damage(dmg * CharacterBehaviour.characterStats.associatedLevel, null, playerObj);
             }
         }       
     }

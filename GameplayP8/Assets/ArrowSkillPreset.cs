@@ -17,6 +17,8 @@ public class ArrowSkillPreset : MonoBehaviour
     [SerializeField] private BasicAASkill basicAASkill;
     [SerializeField] private DisplayCouldown couldown;
 
+    [SerializeField] private List<DisplayCouldown> displayers = new List<DisplayCouldown>();
+
     public bool autoEquip;
 
     private bool equiped;
@@ -25,11 +27,6 @@ public class ArrowSkillPreset : MonoBehaviour
     {
         if (autoEquip)
             Equip();
-    }
-
-    private void Start()
-    {
-        transform.parent.parent.gameObject.SetActive(false) ;
     }
 
     public void Equip()
@@ -47,6 +44,7 @@ public class ArrowSkillPreset : MonoBehaviour
                 if (character.basicAttacks[i] == null)
                 {
                     character.basicAttacks[i] = basicAASkill;
+                    displayers[i].SetImage(image);
                     buttoText.text = "Unequip";
                     equiped = true;
                     break;
@@ -60,6 +58,7 @@ public class ArrowSkillPreset : MonoBehaviour
                 if (character.abbilityAttacks[i] == null)
                 {
                     character.abbilityAttacks[i] = abbilitySkill;
+                    displayers[i].SetImage(image);
                     buttoText.text = "Unequip";
                     equiped = true;
                     break;
@@ -78,6 +77,7 @@ public class ArrowSkillPreset : MonoBehaviour
                 if (character.basicAttacks[i] == basicAASkill)
                 {
                     character.basicAttacks[i] = null;
+                    displayers[i].SetImage(null);
                     buttoText.text = "Equip";
                     equiped = false;
                     break;
@@ -91,6 +91,7 @@ public class ArrowSkillPreset : MonoBehaviour
                 if (character.abbilityAttacks[i] == abbilitySkill)
                 {
                     character.abbilityAttacks[i] = null;
+                    displayers[i].SetImage(null);
                     buttoText.text = "Equip";
                     equiped = false;
                     break;

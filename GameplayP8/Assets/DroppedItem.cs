@@ -45,6 +45,8 @@ public class DroppedItem : MonoBehaviour
     private ArmoreStats armoreStats;
     private WeaponStats weaponStats;
 
+    [SerializeField] private AudioSource soundEffectPickup;
+
     public void Init(Drops d)
     {
         armoreStats = null;
@@ -101,6 +103,7 @@ public class DroppedItem : MonoBehaviour
         {
             //armorePoints = CharacterBehaviour.currentArmoreStats.defence.ToString();
             UIArmoreObject.SetActive(true);
+
         }
     }
 
@@ -108,6 +111,8 @@ public class DroppedItem : MonoBehaviour
     {
         if (Vector3.Distance(CharacterBehaviour.currentPosition, transform.position) < 2)
         {
+            soundEffectPickup.Play();
+
             DroppedItem item = ObjectPooler.SharedInstance.GetPooledObject(3).GetComponent<DroppedItem>();
             item.gameObject.SetActive(true);
             item.transform.position = transform.position;

@@ -30,7 +30,7 @@ public class ArcherAoeRootProtectionSkill : AbbilitySkill
         Collider[] hitColliders = Physics.OverlapSphere(position, radius, mask);
         for (int i = 0; i < hitColliders.Length; i++)
         {
-            hitColliders[i].gameObject.GetComponent<HealthManager>().Damage(damage, null, gameObject);
+            hitColliders[i].gameObject.GetComponent<HealthManager>().Damage(damage * CharacterBehaviour.characterStats.associatedLevel, null, gameObject);
             enemys.Add(hitColliders[i].gameObject.GetComponent<EnemyMovement>());
             if(i < 25)
             {

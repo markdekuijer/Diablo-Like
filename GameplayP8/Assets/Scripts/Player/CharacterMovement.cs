@@ -34,10 +34,6 @@ public class CharacterMovement : MonoBehaviour
         agent.speed = movementSpeed;
 	}
 
-    private void Update()
-    {
-    }
-
     public void SetMoveTarget(Vector3 position)
     {
         currentTarget = position;

@@ -7,6 +7,7 @@ TagManager:
   - Ally
   - Enemy
   - Wall
+  - IgnoreMovement
   layers:
   - Default
   - TransparentFX

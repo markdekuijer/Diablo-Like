@@ -24,8 +24,8 @@ public class ArcherLifestealAttack : BasicAASkill
 
     public override void DealDamage(HealthManager manager, GameObject projectile)
     {
-        myHealth.HealSingle(lifesteal, 0); //lifesteal * playerlevel + lifesteal stats
+        myHealth.Heal(lifesteal * CharacterBehaviour.characterStats.associatedLevel); //lifesteal * playerlevel + lifesteal stats
         manager.Damage(realDmg, null, gameObject);
-        gameObject.SetActive(false);
+        projectile.SetActive(false);
     }
 }

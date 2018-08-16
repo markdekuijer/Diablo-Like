@@ -29,7 +29,7 @@ public class ArcherAoeLifestealSkill : AbbilitySkill
         Collider[] hitColliders = Physics.OverlapSphere(position, radius, mask);
         for (int i = 0; i < hitColliders.Length; i++)
         {
-            hitColliders[i].gameObject.GetComponent<HealthManager>().Damage(damage, null, gameObject);
+            hitColliders[i].gameObject.GetComponent<HealthManager>().Damage(damage * CharacterBehaviour.characterStats.associatedLevel, null, gameObject);
             if (i < 25)
             {
                 particles[i].gameObject.SetActive(true);
@@ -38,7 +38,7 @@ public class ArcherAoeLifestealSkill : AbbilitySkill
         }
 
         duration = maxDuration;
-        hpManager.HealDubble((damage / 100) * lifestealPercentage);
+        hpManager.Heal((damage / 100) * lifestealPercentage);
     }
 
     public override void Tick()

@@ -161,6 +161,10 @@ public class CharacterBehaviour : MonoBehaviour
                 isApproachingEnemy = true;
             }
         }
+        else if(hit.transform.gameObject.CompareTag("IgnoreMovement"))
+        {
+            return;
+        }
         else
         {
             characterMovement.SetMoveTarget(hit.point);

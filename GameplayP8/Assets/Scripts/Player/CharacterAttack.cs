@@ -105,6 +105,7 @@ public abstract class AbbilitySkill : Skill
     protected virtual void Start()
     {
         maxCooldown = cooldown;
+        cooldown = 0;
     }
 
     public virtual void Init(Vector3 position = default(Vector3))

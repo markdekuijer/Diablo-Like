@@ -16,6 +16,7 @@ public class HealthManager : MonoBehaviour
     [SerializeField] private GameUIManager UI;
 
     public event Action<float, HealthManager, GameObject> DamageEvent;
+    public event Action<float, HealthManager, GameObject> HealEvent;
 
     [SerializeField] private float currentHealth, totalHealth;
     private float currentShield, totalShield;
@@ -28,6 +29,7 @@ public class HealthManager : MonoBehaviour
     void Start()
     {
         DamageEvent += TakeDamage;
+        HealEvent += HealSingle;
 
         if (!isPlayer)
         {
@@ -56,27 +58,16 @@ public class HealthManager : MonoBehaviour
             MaxHP();
     }
 
-    public void HealSingle(float hpHeal, float shieldHeal)
+    public void HealSingle(float hpHeal, HealthManager h = null, GameObject g = null)
     {
         currentHealth += hpHeal;
         if (currentHealth > totalHealth)
             currentHealth = totalHealth;
-
-        currentShield += shieldHeal;
-        if (currentShield > totalShield)
-            currentShield = totalShield;
     }
 
-    public void HealDubble(float totalHeal)
+    public void Heal(float hp)
     {
-        if(totalHeal > (totalHealth - currentHealth))
-        {
-            float hpHeal = totalHeal - currentHealth;
-            float shieldHeal = totalHeal - hpHeal;
-
-            currentHealth += hpHeal;
-            currentShield += shieldHeal;
-        }
+        HealEvent(hp, this, null);
     }
 
     public void MaxHP()

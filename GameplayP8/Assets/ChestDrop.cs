@@ -5,6 +5,7 @@ using UnityEngine;
 public class ChestDrop : MonoBehaviour
 {
     [SerializeField] private List<Drops> drops = new List<Drops>();
+    [SerializeField] private Animator anim;
     private bool used;
 
 	void Start ()
@@ -17,11 +18,16 @@ public class ChestDrop : MonoBehaviour
         if (used || Vector3.Distance(transform.position , CharacterBehaviour.currentPosition) > 2)
             return;
 
+        anim.SetTrigger("Open");
+        used = true;
+    }
+
+    private void OnMouseUp()
+    {
         DroppedItem item = ObjectPooler.SharedInstance.GetPooledObject(3).GetComponent<DroppedItem>();
         item.gameObject.SetActive(true);
         item.transform.position = transform.position;
         item.transform.rotation = Quaternion.Euler(0, 0, 0);
         item.Init(drops[Random.Range(0, drops.Count)]);
-        used = true;
     }
 }

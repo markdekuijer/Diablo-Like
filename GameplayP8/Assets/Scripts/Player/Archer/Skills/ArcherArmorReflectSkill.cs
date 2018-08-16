@@ -34,7 +34,6 @@ public class ArcherArmorReflectSkill : AbbilitySkill
     {
         if (enemyHp == null)
         {
-            Debug.LogError("VERGETEN ENEMY HP MEE TE GEVEN BIJ DMG EVENT");
             return;
         }
 

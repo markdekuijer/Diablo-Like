@@ -24,7 +24,7 @@ public class ArcherHealSkill : AbbilitySkill
         cooldown = maxCooldown;
         obj.transform.position = transform.position + Vector3.down;
         duration = maxDuration;
-        healthManager.HealDubble(heal);
+        healthManager.Heal(heal * CharacterBehaviour.characterStats.associatedLevel);
     }
 
     public override void Tick()

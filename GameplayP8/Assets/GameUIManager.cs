@@ -19,6 +19,16 @@ public class GameUIManager : MonoBehaviour
     {
         hpBar.fillAmount = hpManager.GetMaxHp / hpManager.GetCurrentHp;
         hpManager.DamageEvent += UpdateHealth;
+        hpManager.HealEvent += UpdateHealth;
+        presets.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.S))
+            OpenPresets();
+        if (Input.GetKeyDown(KeyCode.H))
+            hpManager.Heal(10);
     }
 
     public void UpdateHealth(float f, HealthManager h, GameObject g)

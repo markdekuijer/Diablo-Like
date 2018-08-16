@@ -107,7 +107,7 @@ public class EnemyMovement : MonoBehaviour
 
     public void HandleRoot()
     {
-        if (isRooted)
+        if (isRooted || inAttack)
         {
             BreakSpeed();
         }

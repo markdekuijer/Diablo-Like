@@ -7,6 +7,8 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField] private float attackRate;
     [SerializeField] private float maxAttackRange;
     [SerializeField] private float dmg;
+    [SerializeField] private bool isArcher;
+    [SerializeField] private GameObject archerArrow;
     private EnemyBrain brain;
     private bool canAttack;
 
@@ -45,12 +47,18 @@ public class EnemyAttack : MonoBehaviour
         else attackString += "_C";
 
         brain.animHook.PlayAnim(attackString);
-        brain.movement.isRooted = true;
     }
 
     public virtual void Attack()
     {
-        if(Vector3.Distance(transform.position, brain.movement.moveTarget.transform.position) < maxAttackRange)
+        if (isArcher)
+        {
+            //SpawnArrow;
+            GameObject arrow = Instantiate(archerArrow, transform.position, Quaternion.Euler(transform.position - brain.movement.moveTarget.transform.position));
+            arrow.transform.LookAt(brain.movement.moveTarget.transform.position);
+            print("arrowSpawn Needed");
+        }
+        else if (Vector3.Distance(transform.position, brain.movement.moveTarget.transform.position) < maxAttackRange)
         {
             brain.movement.moveTarget.GetComponent<HealthManager>().Damage(dmg,brain.health);
         }
@@ -60,7 +68,6 @@ public class EnemyAttack : MonoBehaviour
 
     public virtual void ReenableMovement()
     {
-        brain.movement.isRooted = false;
         brain.movement.inAttack = false;
     }
 }

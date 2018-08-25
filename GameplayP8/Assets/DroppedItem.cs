@@ -51,12 +51,14 @@ public class DroppedItem : MonoBehaviour
     {
         armoreStats = null;
         weaponStats = null;
-
+        UIWeaponObject.transform.position = transform.position + (Vector3.up + Vector3.forward);
+        UIWeaponObject.transform.rotation = Quaternion.Euler(52, 0, 0);
         rb.velocity = Vector3.zero;
         rb.AddForce(new Vector3(Random.Range(-1, 1), Random.Range(0, 1), Random.Range(-1, 1)));
 
         if(d is WeaponStats)
         {
+            
             print("Weapon");
             weaponStats = (WeaponStats)d;
             meshRenderer.mesh = bowMesh;

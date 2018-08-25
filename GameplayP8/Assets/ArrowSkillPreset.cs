@@ -45,6 +45,7 @@ public class ArrowSkillPreset : MonoBehaviour
                 {
                     character.basicAttacks[i] = basicAASkill;
                     displayers[i].SetImage(image);
+                    displayers[i].GetComponent<Image>().color = new Color(255, 255, 255, 255);
                     buttoText.text = "Unequip";
                     equiped = true;
                     break;
@@ -59,6 +60,7 @@ public class ArrowSkillPreset : MonoBehaviour
                 {
                     character.abbilityAttacks[i] = abbilitySkill;
                     displayers[i].SetImage(image);
+                    displayers[i].GetComponent<Image>().color = new Color(255, 255, 255, 255);
                     buttoText.text = "Unequip";
                     equiped = true;
                     break;
@@ -78,6 +80,7 @@ public class ArrowSkillPreset : MonoBehaviour
                 {
                     character.basicAttacks[i] = null;
                     displayers[i].SetImage(null);
+                    displayers[i].GetComponent<Image>().color = new Color(0, 0, 0, 0);
                     buttoText.text = "Equip";
                     equiped = false;
                     break;
@@ -92,6 +95,7 @@ public class ArrowSkillPreset : MonoBehaviour
                 {
                     character.abbilityAttacks[i] = null;
                     displayers[i].SetImage(null);
+                    displayers[i].GetComponent<Image>().color = new Color(0, 0, 0, 0);
                     buttoText.text = "Equip";
                     equiped = false;
                     break;

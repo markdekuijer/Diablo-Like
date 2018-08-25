@@ -25,7 +25,6 @@ public class HealthManager : MonoBehaviour
     public float GetMaxHp { get { return totalHealth; } }
     public float GetCurrentHp { get { return currentHealth; } }
 
-
     void Start()
     {
         DamageEvent += TakeDamage;
@@ -34,9 +33,18 @@ public class HealthManager : MonoBehaviour
         if (!isPlayer)
         {
             totalHealth = UnityEngine.Random.Range(minHealth, maxHealth);
+            if (transform.localScale != Vector3.one)
+            {
+                print("tanky");
+                totalHealth = totalHealth * 3;
+            }
             currentHealth = totalHealth;
 
             totalShield = UnityEngine.Random.Range(minShield, maxShield);
+            if (transform.localScale != Vector3.one)
+            {
+                totalShield = totalShield * 3;
+            }
             currentShield = totalShield;
         }
         else

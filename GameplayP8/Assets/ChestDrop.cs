@@ -15,19 +15,20 @@ public class ChestDrop : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (used || Vector3.Distance(transform.position , CharacterBehaviour.currentPosition) > 2)
-            return;
 
-        anim.SetTrigger("Open");
-        used = true;
     }
 
     private void OnMouseUp()
     {
+        if (used || Vector3.Distance(transform.position, CharacterBehaviour.currentPosition) > 2.5f)
+            return;
+
+        anim.SetTrigger("Open");
+        used = true;
         DroppedItem item = ObjectPooler.SharedInstance.GetPooledObject(3).GetComponent<DroppedItem>();
         item.gameObject.SetActive(true);
         item.transform.position = transform.position;
-        item.transform.rotation = Quaternion.Euler(0, 0, 0);
+        item.transform.rotation = transform.rotation;
         item.Init(drops[Random.Range(0, drops.Count)]);
     }
 }
